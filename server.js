@@ -115,14 +115,21 @@ async function initializeDatabase() {
         `;
         await pool.query(createTableSql);
         console.log("Table structures verified successfully!");
-        
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
     } catch (err) {
         console.error("Failed to automatically build required database tables:", err.message);
     }
 }
 
+// Run database initialization
 initializeDatabase();
+
+// EXPORT THE APP: Crucial requirement for Vercel Serverless Functions
+module.exports = app;
+
+// Keep the local fallback listener ONLY if we are running locally
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = 3000;
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
