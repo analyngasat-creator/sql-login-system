@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication System</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { margin-bottom: 20px; color: #333; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #666; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        .requirements { font-size: 11px; color: #888; margin-top: 4px; display: block; }
+        button { width: 100%; padding: 10px; background: #007bff; border: none; color: white; font-size: 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #0056b3; }
+        .btn-logout { background: #dc3545; }
+        .btn-logout:hover { background: #bd2130; }
+        .toggle-link { text-align: center; margin-top: 15px; font-size: 14px; color: #007bff; cursor: pointer; }
+        .hidden { display: none; }
+        .message { padding: 10px; margin-bottom: 15px; border-radius: 4px; text-align: center; font-size: 14px; display: none; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .dashboard-welcome { font-size: 18px; margin-bottom: 20px; text-align: center; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="msgBox" class="message"></div>
+
+    <!-- Login Form -->
+    <div id="loginSection">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username or Email</label>
+                <input type="text" name="identifier" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="toggle-link" onclick="toggleForms()">Don't have an account? Register here</div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerSection" class="hidden">
+        <h2>Create Account</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" minlength="3" pattern="^[a-zA-Z0-9]+$" title="Alphanumeric characters only, min 3 letters" required>
+                <span class="requirements">Min. 3 characters, alphanumeric only.</span>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <!-- Rule: Min 8 chars, at least 1 uppercase, 1 lowercase, 1 number -->
+                <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number, one uppercase, one lowercase letter, and at least 8 characters" required>
+                <span class="requirements">Min. 8 characters (1 uppercase, 1 lowercase, 1 number).</span>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="toggle-link" onclick="toggleForms()">Already have an account? Login here</div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="hidden">
+        <h2>User Dashboard</h2>
+        <div class="dashboard-welcome">Hello, <strong id="userDisplay">User</strong>!</div>
+        <p style="text-align: center; color: #777; margin-bottom: 20px;">You have successfully accessed your account area.</p>
+        <button class="btn-logout" onclick="logout()">Log Out</button>
+    </div>
+</div>
+
+<script>
+    const loginSection = document.getElementById('loginSection');
+    const registerSection = document.getElementById('registerSection');
+    const dashboardSection = document.getElementById('dashboardSection');
+    const msgBox = document.getElementById('msgBox');
+    const userDisplay = document.getElementById('userDisplay');
+
+    function toggleForms() {
+        loginSection.classList.toggle('hidden');
+        registerSection.classList.toggle('hidden');
+        dashboardSection.classList.add('hidden');
+        msgBox.style.display = 'none';
+    }
+
+    function showMessage(text, isSuccess) {
+        msgBox.textContent = text;
+        msgBox.className = `message ${isSuccess ? 'success' : 'error'}`;
+        msgBox.style.display = 'block';
+    }
+
+    // Handle Registration Submission
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        showMessage(result.message, response.ok);
+        if (response.ok) {
+            e.target.reset();
+            setTimeout(() => { toggleForms(); }, 1500);
+        }
+    });
+
+    // Handle Login Submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        
+        if (response.ok) {
+            loginSection.classList.add('hidden');
+            registerSection.classList.add('hidden');
+            msgBox.style.display = 'none';
+            
+            userDisplay.textContent = result.username;
+            dashboardSection.classList.remove('hidden');
+        } else {
+            showMessage(result.message, false);
+        }
+    });
+
+    function logout() {
+        dashboardSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+        document.getElementById('loginForm').reset();
+        showMessage("Logged out successfully.", true);
+    }
+</script>
+</body>
+</html>
