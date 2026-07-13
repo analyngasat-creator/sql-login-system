@@ -2,14 +2,22 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const cors = require('cors'); // Install this if you haven't: npm install cors
 
 const app = express();
 app.use(express.json());
+
+// Enable CORS so your Vercel frontend can safely communicate with this Railway backend
+app.use(cors({
+    origin: process.env.FRONTEND_URL || '*', // Fallback to all origins if not set yet
+    credentials: true
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Database Connection Configuration (Handles both Local and Cloud Environments)
+// Database Connection Configuration (Handles Local and Railway Environments)
 const dbConfig = process.env.DATABASE_URL 
-    ? { uri: process.env.DATABASE_URL } // Cloud deployment database connection string
+    ? { uri: process.env.DATABASE_URL } 
     : {
         host: 'localhost',
         user: 'root',
@@ -23,7 +31,7 @@ const pool = mysql.createPool({
     connectionLimit: 10
 });
 
-// Route: Register Endpoint with Validation Rules
+// Route: Register Endpoint
 app.post('/api/register', async (expressReq, expressRes) => {
     try {
         const { username, email, password } = expressReq.body;
@@ -32,19 +40,16 @@ app.post('/api/register', async (expressReq, expressRes) => {
             return expressRes.status(400).json({ message: 'All fields are required.' });
         }
 
-        // Rule Validation: Username check (Alphanumeric, length >= 3)
         const usernameRegex = /^[a-zA-Z0-9]{3,}$/;
         if (!usernameRegex.test(username)) {
             return expressRes.status(400).json({ message: 'Username must be at least 3 characters and contain alphanumeric characters only.' });
         }
 
-        // Rule Validation: Email format check
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return expressRes.status(400).json({ message: 'Please enter a valid email address.' });
         }
 
-        // Rule Validation: Password strength check (Min 8 characters, 1 upper, 1 lower, 1 digit)
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         if (!passwordRegex.test(password)) {
             return expressRes.status(400).json({ message: 'Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, and a number.' });
@@ -89,7 +94,6 @@ app.post('/api/login', async (expressReq, expressRes) => {
             return expressRes.status(401).json({ message: 'Invalid credentials.' });
         }
 
-        // Returns both the success message and username back to the dashboard frontend
         return expressRes.json({ 
             message: `Welcome back, ${user.username}!`, 
             username: user.username 
@@ -115,21 +119,14 @@ async function initializeDatabase() {
         `;
         await pool.query(createTableSql);
         console.log("Table structures verified successfully!");
+        
+        const PORT = process.env.PORT || 3000;
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
     } catch (err) {
         console.error("Failed to automatically build required database tables:", err.message);
     }
 }
 
-// Run database initialization
 initializeDatabase();
-
-// EXPORT THE APP: Crucial requirement for Vercel Serverless Functions
-module.exports = app;
-
-// Keep the local fallback listener ONLY if we are running locally
-if (process.env.NODE_ENV !== 'production') {
-    const PORT = 3000;
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-    });
-}
