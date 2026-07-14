@@ -3,26 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication System</title>
+    <title>Bugsite - Enterprise Admin Portal</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { margin-bottom: 20px; color: #333; text-align: center; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { background: #1e293b; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); width: 100%; max-width: 1000px; min-height: 650px; display: flex; flex-direction: column; }
+        
+        h2 { margin-bottom: 20px; color: #fff; text-align: center; font-size: 26px; font-weight: 600; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; color: #666; font-size: 14px; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-        .requirements { font-size: 11px; color: #888; margin-top: 4px; display: block; }
-        button { width: 100%; padding: 10px; background: #007bff; border: none; color: white; font-size: 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
-        button:hover { background: #0056b3; }
-        .btn-logout { background: #dc3545; }
-        .btn-logout:hover { background: #bd2130; }
-        .toggle-link { text-align: center; margin-top: 15px; font-size: 14px; color: #007bff; cursor: pointer; }
-        .hidden { display: none; }
-        .message { padding: 10px; margin-bottom: 15px; border-radius: 4px; text-align: center; font-size: 14px; display: none; }
-        .success { background: #d4edda; color: #155724; }
-        .error { background: #f8d7da; color: #721c24; }
-        .dashboard-welcome { font-size: 18px; margin-bottom: 20px; text-align: center; color: #555; }
+        label { display: block; margin-bottom: 6px; color: #94a3b8; font-size: 14px; }
+        input { width: 100%; padding: 12px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; font-size: 16px; color: #fff; transition: border 0.2s; }
+        input:focus { border-color: #38bdf8; outline: none; }
+        
+        button { width: 100%; padding: 12px; background: #0284c7; border: none; color: white; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+        button:hover { background: #0369a1; }
+        .btn-danger { background: #ef4444; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-secondary { background: #475569; }
+        .btn-secondary:hover { background: #334155; }
+        
+        .toggle-link { text-align: center; margin-top: 15px; font-size: 14px; color: #38bdf8; cursor: pointer; }
+        .hidden { display: none !important; }
+        .message { padding: 12px; margin-bottom: 20px; border-radius: 6px; text-align: center; font-size: 14px; display: none; font-weight: 500; }
+        .success { background: #064e3b; color: #a7f3d0; border: 1px solid #047857; }
+        .error { background: #7f1d1d; color: #fca5a5; border: 1px solid #b91c1c; }
+
+        /* Navigation Breadcrumbs */
+        .breadcrumb-nav { font-size: 14px; color: #94a3b8; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb-link { color: #38bdf8; cursor: pointer; font-weight: 500; text-decoration: none; }
+        .breadcrumb-link:hover { text-decoration: underline; }
+
+        /* Business Dashboard Metrics Layout */
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 25px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        .metric-card { background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 8px; }
+        .metric-card h4 { color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .metric-val { font-size: 28px; font-weight: 700; color: #fff; }
+        
+        /* Layout Panels */
+        .card-menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .feature-card { background: #111827; border: 1px solid #334155; padding: 25px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
+        .feature-card h4 { font-size: 18px; color: #fff; margin-bottom: 8px; }
+        .feature-card p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; line-height: 1.5; }
+        
+        .action-btn { padding: 10px 16px; font-size: 14px; margin-top: auto; width: 100%; text-align: center; border-radius: 6px; }
+        .inline-input { padding: 12px; font-size: 14px; width: 100%; margin-bottom: 10px; }
+        
+        /* Toggle Switch Styling */
+        .vulnerability-control { background: #1e293b; border: 1px solid #475569; padding: 12px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #64748b; transition: .3s; border-radius: 22px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+        input:checked + .slider { background-color: #ef4444; }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* Dynamic Pages View Chamber */
+        .page-view-container { background: #111827; border: 1px solid #334155; padding: 25px; border-radius: 8px; flex-grow: 1; }
+        .page-title { font-size: 22px; color: #fff; margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+
+        /* Diagnostic Console Stream Output */
+        .console-box { background: #000; font-family: monospace; padding: 15px; border-radius: 6px; margin-top: auto; border: 1px solid #334155; max-height: 150px; overflow-y: auto; font-size: 13px; color: #38bdf8; }
+        .console-title { font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -30,67 +72,172 @@
 <div class="container">
     <div id="msgBox" class="message"></div>
 
-    <!-- Login Form -->
+    <!-- Login Section -->
     <div id="loginSection">
-        <h2>Login</h2>
+        <h2>System Sign-In</h2>
         <form id="loginForm">
             <div class="form-group">
-                <label>Username or Email</label>
-                <input type="text" name="identifier" required>
+                <label>User Identifier (Username / Email)</label>
+                <input type="text" id="loginIdentifier" name="identifier" required>
             </div>
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
+                <label>Password Verification</label>
+                <input type="password" id="loginPassword" name="password" required>
             </div>
-            <button type="submit">Sign In</button>
+            <button type="submit">Access Platform</button>
         </form>
-        <div class="toggle-link" onclick="toggleForms()">Don't have an account? Register here</div>
+        <div class="toggle-link" onclick="toggleForms()">Provision new testing account</div>
     </div>
 
-    <!-- Register Form -->
+    <!-- Register Section -->
     <div id="registerSection" class="hidden">
-        <h2>Create Account</h2>
+        <h2>Account Provisioning</h2>
         <form id="registerForm">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" minlength="3" pattern="^[a-zA-Z0-9]+$" title="Alphanumeric characters only, min 3 letters" required>
-                <span class="requirements">Min. 3 characters, alphanumeric only.</span>
+                <input type="text" name="username" minlength="3" pattern="^[a-zA-Z0-9]+$" required>
             </div>
             <div class="form-group">
                 <label>Email Address</label>
                 <input type="email" name="email" required>
             </div>
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number, one uppercase, one lowercase letter, and at least 8 characters" required>
-                <span class="requirements">Min. 8 characters (1 uppercase, 1 lowercase, 1 number).</span>
+                <label>Security Password</label>
+                <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit">Create Account</button>
         </form>
-        <div class="toggle-link" onclick="toggleForms()">Already have an account? Login here</div>
+        <div class="toggle-link" onclick="toggleForms()">Return to sign-in portal</div>
     </div>
 
-    <!-- Dashboard Section -->
-    <div id="dashboardSection" class="hidden">
-        <h2>User Dashboard</h2>
-        <div class="dashboard-welcome">Hello, <strong id="userDisplay">User</strong>!</div>
-        <p style="text-align: center; color: #777; margin-bottom: 20px;">You have successfully accessed your account area.</p>
-        <button class="btn-logout" onclick="logout()">Log Out</button>
+    <!-- Real Business Context Dashboard Frame -->
+    <div id="dashboardSection" class="hidden" style="display: flex; flex-direction: column; flex-grow: 1;">
+        <div class="dashboard-header">
+            <div>
+                <h3 style="font-size: 22px; color: #fff;">Bugsite Corporate Portal</h3>
+                <span style="font-size: 13px; color: #94a3b8;">Session: <strong id="userDisplay" style="color: #34d399;">User</strong></span>
+            </div>
+            <button class="btn-danger" onclick="logout()" style="padding: 8px 16px; width: auto;">Logout</button>
+        </div>
+
+        <!-- Dynamic Page Workspace Holder -->
+        
+        <!-- MAIN MAIN HUB PAGE VIEW -->
+        <div id="page-hub" class="page-route">
+            <!-- Corporate Analytics Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Total Revenue</h4>
+                    <div class="metric-val">$148,250</div>
+                </div>
+                <div class="metric-card">
+                    <h4>System Tasks Completed</h4>
+                    <div class="metric-val" id="stateCounter">0</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Active Node Subscriptions</h4>
+                    <div class="metric-val">1,842</div>
+                </div>
+            </div>
+
+            <div class="card-menu-grid">
+                <div class="feature-card">
+                    <h4>Security Auditing Center</h4>
+                    <p>Toggle system query configurations and check authentication security boundaries or simulate remote database configuration vulnerabilities.</p>
+                    <button class="action-btn" onclick="navigateToPage('page-security')">Open Security Page</button>
+                </div>
+                <div class="feature-card">
+                    <h4>Ledger Synchronization Manager</h4>
+                    <p>Execute parallel transaction workflows, optimize relational table concurrency parameters, and inspect database lock performance metrics.</p>
+                    <button class="action-btn" style="background: #a855f7;" onclick="navigateToPage('page-ledger')">Open Ledger Page</button>
+                </div>
+                <div class="feature-card">
+                    <h4>Corporate Publishing Console</h4>
+                    <p>Broadcast organizational feed descriptions, manage real-time UI messaging tickers, and interface output pipeline streams.</p>
+                    <button class="action-btn" style="background: #eab308; color: #000;" onclick="navigateToPage('page-publishing')">Open Publishing Page</button>
+                </div>
+                <div class="feature-card">
+                    <h4>System Diagnostic Utilities</h4>
+                    <p>Evaluate engine heap usage boundaries, test allocation routines, and monitor thread responsiveness arrays under load stress.</p>
+                    <button class="action-btn style-btn" style="background: #4b5563;" onclick="navigateToPage('page-diagnostics')">Open Diagnostics Page</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUB PAGE: SECURITY CENTER -->
+        <div id="page-security" class="page-route page-view-container hidden">
+            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Security Center</span></div>
+            <h3 class="page-title">Security Auditing Room</h3>
+            <div class="vulnerability-control">
+                <div>
+                    <span style="font-size: 14px; display: block; font-weight: 600;">Disable Query Parameterization</span>
+                    <span style="font-size: 11px; color: #94a3b8;">Exposes login API strings directly to dynamic concatenation validation vectors.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="sqliToggle" onchange="toggleSqlVulnerability(this.checked)">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button class="btn-danger" style="margin-top: 15px;" onclick="runSqliAttack()">Simulate Login Override Attack</button>
+        </div>
+
+        <!-- SUB PAGE: LEDGER MANAGER -->
+        <div id="page-ledger" class="page-route page-view-container hidden">
+            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Ledger Manager</span></div>
+            <h3 class="page-title">Ledger Synchronization Manager</h3>
+            <p style="font-size: 14px; color: #94a3b8; margin-bottom: 20px;">Fires heavy bulk writing modifications in parallel loops to cross-verify database row locking rules.</p>
+            <button style="background: #a855f7;" onclick="triggerDeadlockSimulation()">Batch Process Transactions Now</button>
+        </div>
+
+        <!-- SUB PAGE: PUBLISHING CONSOLE -->
+        <div id="page-publishing" class="page-route page-view-container hidden">
+            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Publishing Console</span></div>
+            <h3 class="page-title">Corporate Broadcast Feed</h3>
+            <div class="form-group">
+                <label>Add Public System Announcement</label>
+                <input type="text" id="announcementInput" placeholder="Enter message text script parameters...">
+            </div>
+            <button style="background: #eab308; color: #000;" onclick="triggerDOMInjection()">Publish Announcement</button>
+        </div>
+
+        <!-- SUB PAGE: DIAGNOSTICS UTILITIES -->
+        <div id="page-diagnostics" class="page-route page-view-container hidden">
+            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>System Diagnostics</span></div>
+            <h3 class="page-title">Diagnostic System Routines</h3>
+            <p style="font-size: 14px; color: #94a3b8; margin-bottom: 15px;">Perform metric adjustments and trigger internal browser evaluation limits.</p>
+            
+            <button class="btn-secondary" onclick="triggerRaceCondition()" style="margin-bottom: 15px;">Process Operations Pipeline (Race Condition)</button>
+            <button class="btn-secondary" onclick="triggerMemoryLeak()" style="margin-bottom: 15px;">Run Heap Allocation Test (Memory Leak)</button>
+            <button class="btn-secondary" onclick="triggerCallStackOverflow()">Optimize Rendering Engine (Call Stack Overflow)</button>
+        </div>
+
+        <!-- Telemetry System Output Stream (Stays visible across all pages!) -->
+        <div class="console-title">Live System Operations Event Stream</div>
+        <div id="logConsole" class="console-box">> System online. Navigation hub operational.</div>
     </div>
 </div>
 
 <script>
-    // AUTOMATIC API DETECTOR: Uses localhost during development, and switches to Railway in production
-    // REPLACE the URL string below with your actual live Railway public domain once generated!
     const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? '' 
-        : 'https://your-railway-backend-url.up.railway.app';
+        : 'https://your-railway-backend-url.up.railway.app'; // <--- Put your live Railway URL here!
 
     const loginSection = document.getElementById('loginSection');
     const registerSection = document.getElementById('registerSection');
     const dashboardSection = document.getElementById('dashboardSection');
     const msgBox = document.getElementById('msgBox');
     const userDisplay = document.getElementById('userDisplay');
+    const logConsole = document.getElementById('logConsole');
+    const stateCounter = document.getElementById('stateCounter');
+
+    // Navigation Page Engine
+    function navigateToPage(pageId) {
+        document.querySelectorAll('.page-route').forEach(page => {
+            page.classList.add('hidden');
+        });
+        document.getElementById(pageId).classList.remove('hidden');
+        writeToConsole(`Navigated view context window target: ${pageId}`);
+    }
 
     function toggleForms() {
         loginSection.classList.toggle('hidden');
@@ -105,65 +252,143 @@
         msgBox.style.display = 'block';
     }
 
-    // Handle Registration Submission
+    function writeToConsole(logMessage, color = "#38bdf8") {
+        const timestamp = new Date().toLocaleTimeString();
+        logConsole.innerHTML += `<br><span style="color: ${color}">> [${timestamp}] ${logMessage}</span>`;
+        logConsole.scrollTop = logConsole.scrollHeight;
+    }
+
+    // Auth Actions
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-
         try {
             const response = await fetch(`${API_BASE_URL}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(Object.fromEntries(formData))
             });
             const result = await response.json();
             showMessage(result.message, response.ok);
-            if (response.ok) {
-                e.target.reset();
-                setTimeout(() => { toggleForms(); }, 1500);
-            }
-        } catch (err) {
-            console.error(err);
-            showMessage("Cannot connect to backend service.", false);
-        }
+            if (response.ok) { e.target.reset(); setTimeout(toggleForms, 1500); }
+        } catch (err) { showMessage("Cannot connect to backend service.", false); }
     });
 
-    // Handle Login Submission
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-
         try {
             const response = await fetch(`${API_BASE_URL}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(Object.fromEntries(formData))
             });
             const result = await response.json();
-            
             if (response.ok) {
                 loginSection.classList.add('hidden');
                 registerSection.classList.add('hidden');
                 msgBox.style.display = 'none';
-                
                 userDisplay.textContent = result.username;
                 dashboardSection.classList.remove('hidden');
-            } else {
-                showMessage(result.message, false);
-            }
-        } catch (err) {
-            console.error(err);
-            showMessage("Cannot connect to backend service.", false);
-        }
+                navigateToPage('page-hub');
+                writeToConsole(`Authorized admin session successfully established.`);
+                if (result.queryExecuted) writeToConsole(`[ALERT] DB Executed Unsafe Query: ${result.queryExecuted}`, "#ef4444");
+            } else { showMessage(result.message, false); }
+        } catch (err) { showMessage("Cannot connect to backend service.", false); }
     });
 
     function logout() {
         dashboardSection.classList.add('hidden');
         loginSection.classList.remove('hidden');
         document.getElementById('loginForm').reset();
-        showMessage("Logged out successfully.", true);
+        document.getElementById('sqliToggle').checked = false;
+        toggleSqlVulnerability(false);
+        showMessage("Session terminated successfully.", true);
+    }
+
+    // ==========================================
+    // INTEGRATED SIMULATION LAB INTERACTIVE CORE
+    // ==========================================
+
+    async function toggleSqlVulnerability(isEnabled) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/toggle-vulnerability`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ enabled: isEnabled })
+            });
+            const result = await response.json();
+            writeToConsole(result.message, isEnabled ? "#ef4444" : "#34d399");
+        } catch (err) { writeToConsole("Synchronization error updating configuration runtime states.", "#ef4444"); }
+    }
+
+    async function runSqliAttack() {
+        writeToConsole("Loading injection authentication request parameters...", "#fbbf24");
+        dashboardSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+        document.getElementById('loginIdentifier').value = "' OR '1'='1";
+        document.getElementById('loginPassword').value = "system_override_param";
+        writeToConsole("Routing malicious query string straight to the authentication engine...", "#ef4444");
+        setTimeout(() => { document.getElementById('loginForm').dispatchEvent(new Event('submit')); }, 800);
+    }
+
+    async function triggerDeadlockSimulation() {
+        writeToConsole("Dispatching concurrent row modifications (Transactions A and B)...", "#c084fc");
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/simulate-deadlock`, { method: 'POST' });
+            const result = await response.json();
+            if (response.ok && result.errorCaught) {
+                writeToConsole("!! DATABASE CRITICAL TRANSACTION DEADLOCK ENCOUNTERED !!", "#ef4444");
+                writeToConsole(`Aborted Transaction Handle: ${result.errorCaught.transaction}`, "#fbbf24");
+                writeToConsole(`MySQL Native Code Error Flag: ${result.errorCaught.code}`, "#c084fc");
+                writeToConsole(`Engine Statement Payload: ${result.errorCaught.details}`, "#38bdf8");
+                writeToConsole(`Backend Framework Status: ${result.systemStatus}`, "#34d399");
+            } else { writeToConsole(result.message, "#fbbf24"); }
+        } catch (err) { writeToConsole("Connection error while requesting remote transaction pools.", "#ef4444"); }
+    }
+
+    let sharedStateTarget = 0;
+    function triggerRaceCondition() {
+        writeToConsole("Processing double-threaded metrics computations parallel pipelines...");
+        const simulatedFetch = (id, delay, delta) => {
+            setTimeout(() => {
+                sharedStateTarget += delta;
+                stateCounter.textContent = sharedStateTarget;
+                writeToConsole(`⚡ Async Pipeline Response #${id} completed (+${delta}). Output Registry: ${sharedStateTarget}`);
+            }, delay);
+        };
+        simulatedFetch(1, 400, 10);
+        simulatedFetch(2, 50, 5);
+    }
+
+    const structuralLeakedArray = [];
+    function triggerMemoryLeak() {
+        writeToConsole("Executing systemic memory evaluation cycles...", "#fbbf24");
+        for (let i = 0; i < 15000; i++) {
+            structuralLeakedArray.push(new Array(50).fill("Detached Element Row Matrix Data Leak Stream"));
+        }
+        window.addEventListener('resize', () => { console.log(structuralLeakedArray.length); });
+        writeToConsole(`🧠 Total diagnostics memory stack size expanded. System registry allocation index count: ${structuralLeakedArray.length} objects.`);
+    }
+
+    function triggerDOMInjection() {
+        const inputField = document.getElementById('announcementInput');
+        const rawTextPayload = inputField.value;
+        if (!rawTextPayload) {
+            writeToConsole("Validation Alert: Input submission empty.", "#ef4444");
+            return;
+        }
+        writeToConsole(`Publishing live data payload straight to layout container modules...`);
+        logConsole.innerHTML += `<br><span style="color: #ef4444">> Feed Update: ${rawTextPayload}</span>`;
+        inputField.value = '';
+    }
+
+    function triggerCallStackOverflow() {
+        writeToConsole("⚠️ Executing maximum processing execution thread optimization routines...", "#ef4444");
+        setTimeout(() => {
+            function recurse() { return recurse(); }
+            recurse();
+        }, 500);
     }
 </script>
 </body>
