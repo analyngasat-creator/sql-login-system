@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-// Enable CORS so your Vercel frontend can safely communicate with this Railway backend
+// Enable CORS so your Vercel frontend can safely communicate with this backend
 app.use(cors({
     origin: process.env.FRONTEND_URL || '*', 
     credentials: true
@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Dynamic runtime configuration switch for SQL vulnerability testing
 let isSqlVulnerableMode = false;
 
-// Database Connection Configuration (Handles Local and Railway Environments)
+// Database Connection Configuration (Handles Local and Serverless Environments)
 const dbConfig = process.env.DATABASE_URL 
     ? { uri: process.env.DATABASE_URL } 
     : {
@@ -31,11 +31,42 @@ const dbConfig = process.env.DATABASE_URL
 const pool = mysql.createPool({
     ...dbConfig,
     waitForConnections: true,
-    connectionLimit: 10
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 // Helper function to sleep (to guarantee parallel transaction overlaps)
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Middleware to automatically verify and create missing tables on the first dynamic request
+let dbInitialized = false;
+async function initializeDatabaseMiddleware(req, res, next) {
+    if (dbInitialized) {
+        return next();
+    }
+    try {
+        console.log("Validating database structures on demand...");
+        const createTableSql = `
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(50) NOT NULL UNIQUE,
+                email VARCHAR(100) NOT NULL UNIQUE,
+                password_hash VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `;
+        await pool.query(createTableSql);
+        console.log("Database tables validated successfully!");
+        dbInitialized = true;
+        next();
+    } catch (err) {
+        console.error("Database initialization failed:", err.message);
+        next(); // Fall through to let the endpoints return structured connection errors
+    }
+}
+
+// Inject DB schema validation check into all API calls
+app.use('/api', initializeDatabaseMiddleware);
 
 // Route: Toggle Vulnerability Mode State
 app.post('/api/toggle-vulnerability', (expressReq, expressRes) => {
@@ -111,7 +142,6 @@ app.post('/api/login', async (expressReq, expressRes) => {
             }
 
             const user = rows[0];
-            // Explicitly returning user information to confirm the authentication bypass proof-of-concept
             return expressRes.json({ 
                 message: `[VULNERABLE MECHANISM MATCH] SQLi successful! Bypassed auth verification parameters.`, 
                 username: user.username,
@@ -152,7 +182,6 @@ app.post('/api/login', async (expressReq, expressRes) => {
 app.post('/api/simulate-deadlock', async (expressReq, expressRes) => {
     console.log("[DEADLOCK SIMULATOR] Initiating parallel write lock sequence...");
 
-    // Validate we have enough users to execute locking conflicts
     try {
         const [users] = await pool.query('SELECT id FROM users LIMIT 2');
         if (users.length < 2) {
@@ -171,14 +200,12 @@ app.post('/api/simulate-deadlock', async (expressReq, expressRes) => {
                 await connection.beginTransaction();
                 console.log("[Tx A] Started. Row lock step 1: Row A...");
                 
-                // Acquire lock on the first record
                 await connection.query('SELECT * FROM users WHERE id = ? FOR UPDATE', [firstUserId]);
                 console.log(`[Tx A] Locked Row ID: ${firstUserId}`);
 
-                await sleep(500); // Give Tx B time to lock Record 2
+                await sleep(500); 
 
                 console.log(`[Tx A] Row lock step 2: Requesting Row B (ID: ${secondUserId})...`);
-                // Attempt to acquire lock on the second record (will wait on Tx B)
                 await connection.query('SELECT * FROM users WHERE id = ? FOR UPDATE', [secondUserId]);
                 
                 await connection.commit();
@@ -200,14 +227,12 @@ app.post('/api/simulate-deadlock', async (expressReq, expressRes) => {
                 await connection.beginTransaction();
                 console.log("[Tx B] Started. Row lock step 1: Row B...");
                 
-                // Acquire lock on the second record
                 await connection.query('SELECT * FROM users WHERE id = ? FOR UPDATE', [secondUserId]);
                 console.log(`[Tx B] Locked Row ID: ${secondUserId}`);
 
-                await sleep(500); // Give Tx A time to lock Record 1
+                await sleep(500); 
 
                 console.log(`[Tx B] Row lock step 2: Requesting Row A (ID: ${firstUserId})...`);
-                // Attempt to acquire lock on the first record (causing circular wait/deadlock)
                 await connection.query('SELECT * FROM users WHERE id = ? FOR UPDATE', [firstUserId]);
                 
                 await connection.commit();
@@ -222,7 +247,6 @@ app.post('/api/simulate-deadlock', async (expressReq, expressRes) => {
             }
         };
 
-        // Fire both conflicting queries in parallel execution
         const results = await Promise.all([
             runTransactionA(),
             runTransactionB()
@@ -256,29 +280,13 @@ app.post('/api/simulate-deadlock', async (expressReq, expressRes) => {
     }
 });
 
-// Automatically verify and create missing tables on startup
-async function initializeDatabase() {
-    try {
-        console.log("Checking database table structures...");
-        const createTableSql = `
-            CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(50) NOT NULL UNIQUE,
-                email VARCHAR(100) NOT NULL UNIQUE,
-                password_hash VARCHAR(255) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        `;
-        await pool.query(createTableSql);
-        console.log("Table structures verified successfully!");
-        
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-    } catch (err) {
-        console.error("Failed to automatically build required database tables:", err.message);
-    }
+// Fallback for running locally without Vercel Serverless environment:
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Local server listening on port ${PORT}`);
+    });
 }
 
-initializeDatabase();
+// Export Express Application Instance for Vercel
+module.exports = app;
