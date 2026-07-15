@@ -13,7 +13,8 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+// FIX: Resolve the public folder path from the root directory instead of the nested api/ folder
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Dynamic runtime configuration switch for SQL vulnerability testing
 let isSqlVulnerableMode = false;
@@ -28,11 +29,13 @@ const dbConfig = process.env.DATABASE_URL
         database: 'auth_db'
       };
 
+// Serverless optimization: configuration adjustments for pooling inside ephemeral environments
 const pool = mysql.createPool({
     ...dbConfig,
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 1, // Minimize connections since serverless scales horizontally per request
+    queueLimit: 0,
+    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : undefined // Enable SSL automatically for secure cloud DB configurations like Aiven
 });
 
 // Helper function to sleep (to guarantee parallel transaction overlaps)
