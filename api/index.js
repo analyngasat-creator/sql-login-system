@@ -1,7 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
-const bcrypt = require('bcrypt');
-const path = require('path');
+const bcrypt = require('bcryptjs'); // Swapped to pure JS version to prevent serverless binary crashes
 const cors = require('cors');
 
 const app = express();
@@ -12,9 +11,6 @@ app.use(cors({
     origin: process.env.FRONTEND_URL || '*', 
     credentials: true
 }));
-
-// FIX: Resolve the public folder path from the root directory instead of the nested api/ folder
-app.use(express.static(path.join(__dirname, '../public')));
 
 // Dynamic runtime configuration switch for SQL vulnerability testing
 let isSqlVulnerableMode = false;
@@ -35,7 +31,7 @@ const pool = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 1, // Minimize connections since serverless scales horizontally per request
     queueLimit: 0,
-    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : undefined // Enable SSL automatically for secure cloud DB configurations like Aiven
+    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : undefined // Enable SSL automatically for secure cloud DB configurations
 });
 
 // Helper function to sleep (to guarantee parallel transaction overlaps)
