@@ -47,7 +47,6 @@
         .feature-card p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; line-height: 1.5; }
         
         .action-btn { padding: 10px 16px; font-size: 14px; margin-top: auto; width: 100%; text-align: center; border-radius: 6px; }
-        .inline-input { padding: 12px; font-size: 14px; width: 100%; margin-bottom: 10px; }
         
         /* Toggle Switch Styling */
         .vulnerability-control { background: #1e293b; border: 1px solid #475569; padding: 12px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
@@ -78,11 +77,11 @@
         <form id="loginForm">
             <div class="form-group">
                 <label>User Identifier (Username / Email)</label>
-                <input type="text" id="loginIdentifier" name="identifier" required>
+                <input type="text" id="loginIdentifier" name="identifier" value="admin" required>
             </div>
             <div class="form-group">
                 <label>Password Verification</label>
-                <input type="password" id="loginPassword" name="password" required>
+                <input type="password" id="loginPassword" name="password" value="password" required>
             </div>
             <button type="submit">Access Platform</button>
         </form>
@@ -95,15 +94,15 @@
         <form id="registerForm">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" minlength="3" pattern="^[a-zA-Z0-9]+$" required>
+                <input type="text" name="username" minlength="3" pattern="^[a-zA-Z0-9]+$" value="newUser">
             </div>
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" value="test@bugsite.com">
             </div>
             <div class="form-group">
                 <label>Security Password</label>
-                <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" required>
+                <input type="password" name="password" value="Password123!">
             </div>
             <button type="submit">Create Account</button>
         </form>
@@ -119,16 +118,14 @@
             </div>
             <button class="btn-danger" onclick="logout()" style="padding: 8px 16px; width: auto;">Logout</button>
         </div>
-
-        <!-- Dynamic Page Workspace Holder -->
         
-        <!-- MAIN MAIN HUB PAGE VIEW -->
+        <!-- MAIN HUB PAGE VIEW -->
         <div id="page-hub" class="page-route">
             <!-- Corporate Analytics Metrics -->
             <div class="metrics-grid">
                 <div class="metric-card">
                     <h4>Total Revenue</h4>
-                    <div class="metric-val">$148,250</div>
+                    <div class="metric-val" id="revenueCounter">$148,250</div>
                 </div>
                 <div class="metric-card">
                     <h4>System Tasks Completed</h4>
@@ -141,6 +138,11 @@
             </div>
 
             <div class="card-menu-grid">
+                <div class="feature-card">
+                    <h4>Buggie Burger Ordering Exploit</h4>
+                    <p>Simulate logic and validation exploits. Test order quantities with absolute frontend trust vulnerabilities.</p>
+                    <button class="action-btn" style="background: #e11d48;" onclick="navigateToPage('page-ordering')">Open Ordering System</button>
+                </div>
                 <div class="feature-card">
                     <h4>Security Auditing Center</h4>
                     <p>Toggle system query configurations and check authentication security boundaries or simulate remote database configuration vulnerabilities.</p>
@@ -156,11 +158,34 @@
                     <p>Broadcast organizational feed descriptions, manage real-time UI messaging tickers, and interface output pipeline streams.</p>
                     <button class="action-btn" style="background: #eab308; color: #000;" onclick="navigateToPage('page-publishing')">Open Publishing Page</button>
                 </div>
-                <div class="feature-card">
-                    <h4>System Diagnostic Utilities</h4>
-                    <p>Evaluate engine heap usage boundaries, test allocation routines, and monitor thread responsiveness arrays under load stress.</p>
-                    <button class="action-btn style-btn" style="background: #4b5563;" onclick="navigateToPage('page-diagnostics')">Open Diagnostics Page</button>
+            </div>
+        </div>
+
+        <!-- SUB PAGE: ORDERING SYSTEM -->
+        <div id="page-ordering" class="page-route page-view-container hidden">
+            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Buggie Burger Shop</span></div>
+            <h3 class="page-title">Buggie Burger Checkout Panel</h3>
+            <div style="background: #1e293b; border: 1px solid #334155; padding: 20px; border-radius: 8px; max-width: 400px; margin: 0 auto;">
+                <p style="margin-bottom: 10px; font-size: 16px;">Price per Burger: <strong style="color: #38bdf8;">$100</strong></p>
+                
+                <div class="form-group">
+                    <label for="quantityInput">Order Quantity:</label>
+                    <input type="number" id="quantityInput" value="1" min="1" style="width: 100%; margin-top: 5px;">
                 </div>
+                
+                <div class="vulnerability-control" style="margin-top: 15px; background: #0f172a;">
+                    <div>
+                        <span style="font-size: 13px; display: block; font-weight: 600;">Enable Backend Validation Fix</span>
+                        <span style="font-size: 11px; color: #94a3b8;">Blocks negative amounts from being processed.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="validationToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <button style="background: #22c55e; margin-top: 15px;" onclick="processOrder()">Place Secure Order</button>
+                <div id="orderStatus" style="margin-top: 15px; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; display: none;"></div>
             </div>
         </div>
 
@@ -200,28 +225,13 @@
             <button style="background: #eab308; color: #000;" onclick="triggerDOMInjection()">Publish Announcement</button>
         </div>
 
-        <!-- SUB PAGE: DIAGNOSTICS UTILITIES -->
-        <div id="page-diagnostics" class="page-route page-view-container hidden">
-            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>System Diagnostics</span></div>
-            <h3 class="page-title">Diagnostic System Routines</h3>
-            <p style="font-size: 14px; color: #94a3b8; margin-bottom: 15px;">Perform metric adjustments and trigger internal browser evaluation limits.</p>
-            
-            <button class="btn-secondary" onclick="triggerRaceCondition()" style="margin-bottom: 15px;">Process Operations Pipeline (Race Condition)</button>
-            <button class="btn-secondary" onclick="triggerMemoryLeak()" style="margin-bottom: 15px;">Run Heap Allocation Test (Memory Leak)</button>
-            <button class="btn-secondary" onclick="triggerCallStackOverflow()">Optimize Rendering Engine (Call Stack Overflow)</button>
-        </div>
-
-        <!-- Telemetry System Output Stream (Stays visible across all pages!) -->
+        <!-- Telemetry System Output Stream -->
         <div class="console-title">Live System Operations Event Stream</div>
-        <div id="logConsole" class="console-box">> System online. Navigation hub operational.</div>
+        <div id="logConsole" class="console-box">> System online. Simulation environment ready.</div>
     </div>
 </div>
 
 <script>
-    const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? '' 
-        : 'https://your-railway-backend-url.up.railway.app'; // <--- Put your live Railway URL here!
-
     const loginSection = document.getElementById('loginSection');
     const registerSection = document.getElementById('registerSection');
     const dashboardSection = document.getElementById('dashboardSection');
@@ -229,6 +239,10 @@
     const userDisplay = document.getElementById('userDisplay');
     const logConsole = document.getElementById('logConsole');
     const stateCounter = document.getElementById('stateCounter');
+    const revenueCounter = document.getElementById('revenueCounter');
+
+    let currentRevenue = 148250;
+    let completedTasks = 0;
 
     // Navigation Page Engine
     function navigateToPage(pageId) {
@@ -258,137 +272,107 @@
         logConsole.scrollTop = logConsole.scrollHeight;
     }
 
-    // Auth Actions
-    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    // Completely Backendless Sign-In
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(formData))
-            });
-            const result = await response.json();
-            showMessage(result.message, response.ok);
-            if (response.ok) { e.target.reset(); setTimeout(toggleForms, 1500); }
-        } catch (err) { showMessage("Cannot connect to backend service.", false); }
+        const usernameInput = document.getElementById('loginIdentifier').value;
+        
+        loginSection.classList.add('hidden');
+        registerSection.classList.add('hidden');
+        msgBox.style.display = 'none';
+        
+        userDisplay.textContent = usernameInput || "AdminUser";
+        dashboardSection.classList.remove('hidden');
+        navigateToPage('page-hub');
+        
+        writeToConsole(`Authorized session simulated and successfully established.`);
     });
 
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    // Completely Backendless Sign-Up
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(formData))
-            });
-            const result = await response.json();
-            if (response.ok) {
-                loginSection.classList.add('hidden');
-                registerSection.classList.add('hidden');
-                msgBox.style.display = 'none';
-                userDisplay.textContent = result.username;
-                dashboardSection.classList.remove('hidden');
-                navigateToPage('page-hub');
-                writeToConsole(`Authorized admin session successfully established.`);
-                if (result.queryExecuted) writeToConsole(`[ALERT] DB Executed Unsafe Query: ${result.queryExecuted}`, "#ef4444");
-            } else { showMessage(result.message, false); }
-        } catch (err) { showMessage("Cannot connect to backend service.", false); }
+        showMessage("Account dynamically provisioned locally!", true);
+        setTimeout(toggleForms, 1200);
     });
 
     function logout() {
         dashboardSection.classList.add('hidden');
         loginSection.classList.remove('hidden');
-        document.getElementById('loginForm').reset();
         document.getElementById('sqliToggle').checked = false;
-        toggleSqlVulnerability(false);
         showMessage("Session terminated successfully.", true);
     }
 
     // ==========================================
-    // INTEGRATED SIMULATION LAB INTERACTIVE CORE
+    // BUG-HUNTING WORKFLOW INTERACTIVE LABORATORY
     // ==========================================
 
-    async function toggleSqlVulnerability(isEnabled) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/toggle-vulnerability`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ enabled: isEnabled })
-            });
-            const result = await response.json();
-            writeToConsole(result.message, isEnabled ? "#ef4444" : "#34d399");
-        } catch (err) { writeToConsole("Synchronization error updating configuration runtime states.", "#ef4444"); }
-    }
+    function processOrder() {
+        const qty = Number(document.getElementById('quantityInput').value);
+        const isValidationFixed = document.getElementById('validationToggle').checked;
+        const statusDiv = document.getElementById('orderStatus');
+        
+        statusDiv.style.display = "block";
+        writeToConsole(`Processing dispatch event payload parameter: { quantity: ${qty} }`, "#fbbf24");
 
-    async function runSqliAttack() {
-        writeToConsole("Loading injection authentication request parameters...", "#fbbf24");
-        dashboardSection.classList.add('hidden');
-        loginSection.classList.remove('hidden');
-        document.getElementById('loginIdentifier').value = "' OR '1'='1";
-        document.getElementById('loginPassword').value = "system_override_param";
-        writeToConsole("Routing malicious query string straight to the authentication engine...", "#ef4444");
-        setTimeout(() => { document.getElementById('loginForm').dispatchEvent(new Event('submit')); }, 800);
-    }
-
-    async function triggerDeadlockSimulation() {
-        writeToConsole("Dispatching concurrent row modifications (Transactions A and B)...", "#c084fc");
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/simulate-deadlock`, { method: 'POST' });
-            const result = await response.json();
-            if (response.ok && result.errorCaught) {
-                writeToConsole("!! DATABASE CRITICAL TRANSACTION DEADLOCK ENCOUNTERED !!", "#ef4444");
-                writeToConsole(`Aborted Transaction Handle: ${result.errorCaught.transaction}`, "#fbbf24");
-                writeToConsole(`MySQL Native Code Error Flag: ${result.errorCaught.code}`, "#c084fc");
-                writeToConsole(`Engine Statement Payload: ${result.errorCaught.details}`, "#38bdf8");
-                writeToConsole(`Backend Framework Status: ${result.systemStatus}`, "#34d399");
-            } else { writeToConsole(result.message, "#fbbf24"); }
-        } catch (err) { writeToConsole("Connection error while requesting remote transaction pools.", "#ef4444"); }
-    }
-
-    let sharedStateTarget = 0;
-    function triggerRaceCondition() {
-        writeToConsole("Processing double-threaded metrics computations parallel pipelines...");
-        const simulatedFetch = (id, delay, delta) => {
-            setTimeout(() => {
-                sharedStateTarget += delta;
-                stateCounter.textContent = sharedStateTarget;
-                writeToConsole(`⚡ Async Pipeline Response #${id} completed (+${delta}). Output Registry: ${sharedStateTarget}`);
-            }, delay);
-        };
-        simulatedFetch(1, 400, 10);
-        simulatedFetch(2, 50, 5);
-    }
-
-    const structuralLeakedArray = [];
-    function triggerMemoryLeak() {
-        writeToConsole("Executing systemic memory evaluation cycles...", "#fbbf24");
-        for (let i = 0; i < 15000; i++) {
-            structuralLeakedArray.push(new Array(50).fill("Detached Element Row Matrix Data Leak Stream"));
+        if (isValidationFixed && qty <= 0) {
+            statusDiv.style.background = "#7f1d1d";
+            statusDiv.style.color = "#fca5a5";
+            statusDiv.innerHTML = "Error: Validation Fault! Quantity cannot be 0 or negative.";
+            writeToConsole(`[REJECTED] Validation rule intercepted safe index boundary parameters.`, "#ef4444");
+            return;
         }
-        window.addEventListener('resize', () => { console.log(structuralLeakedArray.length); });
-        writeToConsole(`🧠 Total diagnostics memory stack size expanded. System registry allocation index count: ${structuralLeakedArray.length} objects.`);
+
+        const cost = qty * 100;
+        currentRevenue += cost;
+        completedTasks++;
+        
+        revenueCounter.textContent = `$${currentRevenue.toLocaleString()}`;
+        stateCounter.textContent = completedTasks;
+
+        statusDiv.style.background = "#064e3b";
+        statusDiv.style.color = "#a7f3d0";
+        statusDiv.innerHTML = `Success! Charged: $${cost}`;
+        
+        if (cost < 0) {
+            writeToConsole(`[BUG DETECTED] Negative calculation payload parsed. Financial total corrupted: $${cost}`, "#ef4444");
+        } else {
+            writeToConsole(`Transaction balance finalized. Total generated: $${cost}`, "#34d399");
+        }
+    }
+
+    function toggleSqlVulnerability(isEnabled) {
+        writeToConsole(
+            isEnabled ? "[WARNING] Parameterization disabled. Concatenation parsing vectors open." : "[SAFE] Query context parameterized filters secured.", 
+            isEnabled ? "#ef4444" : "#34d399"
+        );
+    }
+
+    function runSqliAttack() {
+        writeToConsole("Injecting alternative override bypass string metrics...", "#fbbf24");
+        logout();
+        document.getElementById('loginIdentifier').value = "' OR '1'='1";
+        document.getElementById('loginPassword').value = "override";
+        writeToConsole("Bypassing query structure strings directly...", "#ef4444");
+        setTimeout(() => { document.getElementById('loginForm').dispatchEvent(new Event('submit')); }, 500);
+    }
+
+    function triggerDeadlockSimulation() {
+        writeToConsole("Dispatching concurrent row modifications (Transactions A and B)...", "#c084fc");
+        setTimeout(() => {
+            writeToConsole("!! DATABASE CRITICAL TRANSACTION DEADLOCK ENCOUNTERED !!", "#ef4444");
+            writeToConsole(`Aborted Transaction Handle: TX_POOL_99A`, "#fbbf24");
+            writeToConsole(`MySQL Native Code Error Flag: ER_LOCK_DEADLOCK`, "#c084fc");
+        }, 600);
     }
 
     function triggerDOMInjection() {
         const inputField = document.getElementById('announcementInput');
         const rawTextPayload = inputField.value;
-        if (!rawTextPayload) {
-            writeToConsole("Validation Alert: Input submission empty.", "#ef4444");
-            return;
-        }
-        writeToConsole(`Publishing live data payload straight to layout container modules...`);
+        if (!rawTextPayload) return;
+        
+        writeToConsole(`Publishing layout payload straight to DOM container...`);
         logConsole.innerHTML += `<br><span style="color: #ef4444">> Feed Update: ${rawTextPayload}</span>`;
         inputField.value = '';
-    }
-
-    function triggerCallStackOverflow() {
-        writeToConsole("⚠️ Executing maximum processing execution thread optimization routines...", "#ef4444");
-        setTimeout(() => {
-            function recurse() { return recurse(); }
-            recurse();
-        }, 500);
     }
 </script>
 </body>

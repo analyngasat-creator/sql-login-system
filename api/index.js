@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs'); // Swapped to pure JS version to prevent serverless binary crashes
 const cors = require('cors');
+const path = require('path'); // Added path module back for static file resolution
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,9 @@ app.use(cors({
     origin: process.env.FRONTEND_URL || '*', 
     credentials: true
 }));
+
+// Route local requests to the public directory so Ngrok can load your HTML/CSS/JS files
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Dynamic runtime configuration switch for SQL vulnerability testing
 let isSqlVulnerableMode = false;
