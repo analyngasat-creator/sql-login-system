@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="scroll-smooth light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Wishlist (IDOR Sandbox) | ShopVibe</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "primary-container": "#c028d7",
+                        "border-light": "#E5E5E5",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#231b00",
+                        "error": "#EF4444",
+                        "on-secondary-fixed-variant": "#004e5a",
+                        "tertiary-container": "#cea700",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#2fd9f4",
+                        "surface": "#FFFFFF",
+                        "tertiary": "#735c00",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed": "#001f25",
+                        "on-tertiary-fixed": "#231b00",
+                        "text-muted": "#525252",
+                        "on-surface": "#1a1c1c",
+                        "info": "#3B82F6",
+                        "border-light": "#E5E5E5",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#a2eeff",
+                        "surface-tint": "#a200ba",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "text-main": "#171717",
+                        "secondary-fixed": "#a2eeff",
+                        "border-medium": "#D4D4D4",
+                        "surface-container": "#eeeeee",
+                        "surface-bright": "#f9f9f9",
+                        "on-surface": "#1a1c1c",
+                        "on-primary": "#ffffff",
+                        "info": "#3B82F6",
+                        "on-primary-fixed": "#36003e",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "outline-variant": "#d6c0d3",
+                        "on-secondary-fixed": "#001f25",
+                        "background": "#f9f9f9",
+                        "tertiary-fixed-dim": "#eec200",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#fbabff",
+                        "secondary-container": "#3fe1fd",
+                        "text-muted": "#525252",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-high": "#e8e8e8"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "3xl": "64px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "section-desktop": "112px",
+                        "base": "8px",
+                        "2xl": "48px",
+                        "sm": "8px",
+                        "section-tablet": "80px",
+                        "lg": "24px",
+                        "section-mobile": "56px"
+                },
+                "fontFamily": {
+                        "overline": ["Nunito Sans"],
+                        "code": ["JetBrains Mono"],
+                        "body-lg": ["Nunito Sans"],
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "display-mobile": ["Plus Jakarta Sans"],
+                        "headline-mobile": ["Plus Jakarta Sans"],
+                        "body": ["Nunito Sans"],
+                        "body-sm": ["Nunito Sans"],
+                        "caption": ["Nunito Sans"],
+                        "subhead": ["Plus Jakarta Sans"]
+                },
+                "fontSize": {
+                        "overline": ["11px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "code": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                        "display": ["56px", {"lineHeight": "1.1", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                        "display-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "headline-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "caption": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "subhead": ["26px", {"lineHeight": "1.3", "letterSpacing": "0.005em", "fontWeight": "600"}]
+                }
+              }
+            }
+          }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fuchsia-glow:hover {
+            box-shadow: 0 10px 15px -3px rgba(217, 70, 239, 0.2), 0 4px 6px -4px rgba(217, 70, 239, 0.2);
+        }
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-full mx-auto bg-surface shadow-md transition-shadow duration-300">
+    <div class="flex items-center gap-xl">
+        <a class="font-headline text-subhead font-extrabold text-primary tracking-tight" href="/index.html">ShopVibe</a>
+        <div class="hidden md:flex items-center gap-lg">
+            <div class="relative nav-dropdown group h-full py-2">
+                <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
+                    Shop
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                </button>
+                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
+                        <span class="inline-block align-middle mr-1">🏠</span> Home
+                    </a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                </div>
+            </div>
+            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
+            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
+        </div>
+    </div>
+    <div class="flex items-center gap-lg">
+        <div class="hidden md:block relative">
+            <input class="bg-surface-container border-none rounded-full px-lg py-xs text-body-sm w-64 focus:ring-2 focus:ring-primary-container" placeholder="Search..." type="text"/>
+            <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+        </div>
+        <div class="flex gap-md">
+            <button class="material-symbols-outlined text-primary hover:scale-95 transition-transform" data-icon="search">search</button>
+            <button class="material-symbols-outlined text-primary hover:scale-95 transition-transform" data-icon="person">person</button>
+            <button class="material-symbols-outlined text-primary hover:scale-95 transition-transform relative" data-icon="shopping_cart">
+                shopping_cart
+                <span class="absolute -top-xs -right-xs bg-primary text-on-primary text-[10px] rounded-full w-4 h-4 flex items-center justify-center">3</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-[80px] min-h-screen">
+    <!-- IDOR Sandbox Module Banner -->
+    <div class="bg-primary-container/10 border-b border-primary-container/20 py-md">
+        <div class="container mx-auto px-lg flex flex-col md:flex-row items-center justify-between gap-md">
+            <div class="flex items-center gap-md">
+                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                <div>
+                    <p class="font-headline text-body font-bold text-primary">IDOR Sandbox Active</p>
+                    <p class="font-body text-body-sm text-on-surface-variant">The current wishlist is identified by a predictable parameter ID. Change the value below directly:</p>
+                </div>
+            </div>
+            <div class="flex items-center bg-surface px-md py-sm rounded-xl border border-border-light shadow-sm gap-xs">
+                <span class="font-code text-body-sm text-primary">wishlist_id:</span>
+                <input type="number" id="wishlist-id-input" value="1" min="1" class="w-20 h-8 px-2 font-code text-sm rounded border border-border-medium focus:border-primary focus:ring-1 focus:ring-primary bg-background outline-none" oninput="handleIdChange()"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-lg py-2xl grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+        <!-- Hero & Grid Section -->
+        <div class="lg:col-span-8">
+            <div class="mb-xl flex flex-col md:flex-row md:items-end justify-between gap-md">
+                <div>
+                    <div class="inline-flex items-center gap-xs px-sm py-1 bg-on-tertiary-fixed text-tertiary-fixed rounded-full mb-xs">
+                        <span class="material-symbols-outlined text-[14px]">bug_report</span>
+                        <span class="font-overline uppercase">Vulnerability Lab</span>
+                    </div>
+                    <h1 class="font-headline text-headline md:text-display-mobile tracking-tight">Wishlist Output</h1>
+                </div>
+            </div>
+            
+            <!-- Wishlist Record Display Grid -->
+            <div id="wishlist-display" class="grid grid-cols-1 sm:grid-cols-2 gap-lg">
+                <!-- Data will inject here dynamically -->
+            </div>
+        </div>
+
+        <!-- Educational Sidebar -->
+        <aside class="lg:col-span-4 flex flex-col gap-lg">
+            <!-- Vulnerability Info Card -->
+            <div class="bg-surface border border-primary/20 rounded-xl p-xl shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+                <div class="flex items-center gap-md mb-md">
+                    <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">security</span>
+                    </div>
+                    <h2 class="font-headline text-subhead font-bold">Vulnerability Info</h2>
+                </div>
+                <div class="space-y-md">
+                    <div>
+                        <p class="font-headline text-body-sm font-bold text-on-surface-variant uppercase tracking-wider mb-xs">What is IDOR?</p>
+                        <p class="font-body text-body-sm text-text-muted">
+                            Insecure Direct Object Reference (IDOR) occurs when an application provides direct access to objects based on user-supplied input without verifying access right credentials.
+                        </p>
+                    </div>
+                    <div class="bg-surface-container-low p-md rounded-lg border-l-4 border-primary">
+                        <p class="font-body text-body-sm text-on-surface font-semibold mb-xs italic">"In a real app, users shouldn't be able to view or modify others' wishlists by simply changing an ID parameter."</p>
+                    </div>
+                </div>
+                <button class="w-full mt-xl bg-on-surface text-surface py-md rounded-lg font-headline text-body-sm font-bold hover:bg-primary transition-all active:scale-95 flex items-center justify-center gap-sm" onclick="simulateAttack()">
+                    <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                    Simulate Random Attack
+                </button>
+            </div>
+            
+            <!-- Technical Trace Card -->
+            <div class="bg-surface-container-highest border border-border-light rounded-xl p-xl">
+                <h3 class="font-headline text-body font-bold mb-md flex items-center gap-xs">
+                    <span class="material-symbols-outlined text-primary">analytics</span>
+                    Request Inspector
+                </h3>
+                <div class="font-code text-[12px] space-y-xs bg-on-surface text-surface-variant p-md rounded-lg overflow-x-auto">
+                    <p><span class="text-success">GET</span> /api/wishlist/<span id="inspector-id-node" class="text-primary-fixed-dim font-bold">1</span></p>
+                    <p><span class="text-secondary-fixed">Host:</span> shopvibe.io</p>
+                    <p><span class="text-secondary-fixed">Cookie:</span> session_id=abc...987</p>
+                    <hr class="border-outline/30 my-xs"/>
+                    <p class="text-outline">// Missing server side verification controls</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full px-lg py-3xl flex flex-col items-center text-center gap-md bg-surface-container-highest border-t border-border-light">
+    <div class="font-headline text-headline-mobile text-on-surface font-extrabold tracking-tight mb-md">ShopVibe</div>
+    <div class="flex flex-wrap justify-center gap-md mb-md">
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/catalog.html">Catalog (SQLi)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/deals.html">Deals (Race Condition)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/compare.html">Compare (SSRF)</a>
+        <a class="font-body text-body-sm text-primary font-bold hover:underline" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+    </div>
+    <p class="font-body text-body-sm text-text-muted">© 2026 ShopVibe Atomic Vulnerability Architecture Lab. All Rights Reserved.</p>
+</footer>
+
+<script>
+    const idInput = document.getElementById('wishlist-id-input');
+    const displayBox = document.getElementById('wishlist-display');
+    const inspectorNode = document.getElementById('inspector-id-node');
+
+    const productImages = {
+        "Stealth Puffer": "https://lh3.googleusercontent.com/aida-public/AB6AXuByqfEBZqHdlhCQyeq2Bxk9bN6gCIgKh1NimVwJCrYLJicb7lHv-fpn0NodefjY6Aw5lhG6xqAWmpSckuWTexfPztn085RxLcbWN5xdyqAc4SK4utBFuuiRJewViOaxF0IZTC8iwylxdiWLFeJS4fJdavOI6NPFm5TCCM-Pw7pHYthA_qwZ_rgq6Bx6xDancEsy4g0lWFVl7MONhyqcIq9o-WRo5OK6lIySrY-j3HCGR3MkonbP2SOy",
+        "Neon Kicks": "https://lh3.googleusercontent.com/aida-public/AB6AXuDqta0Is-Ab2q3yG_GtH4LrFjYr2uBVTrpsEvM8BqyNNa7qzXmhQjeUL0lv5T3EKiQz9fBBOW3lMdAYKU4tikNvm-8FGbAMkSmMhIm25iuhm465Qg646KpCkKxU_VAYGTAOfpiDtVucJy4DhW89vNjSeKBiV5BkTUJDMWQRvgi2h-LtbPPhzChiBa6yQqDNtQthvZazfdl1xeA-K_jLv-ZzvENGxRxlRx8Ij9qFIxlx6TampLuL1e7Y",
+        "Core Hoodie": "https://lh3.googleusercontent.com/aida-public/AB6AXuC-ydX44K_JXCu_PPmTlt-Uc_fP_wMyayR0etjf-mDwIWrxZJ2LCowAeD0RwA2zi1UuRY2o_ght480gOzDY1GhNvOXpxzkVFjV1LvW44pDx4hHj1YkF4mk-abJh98aEQVrGwTeR7UdLfY5eod-Re3BbEVX384b4tcxcWOW-d2aCuhpVmarz-HQR4JL3XXsoMYhU8KxN75krpwBfgROqNPpkTNmWnsjdTwy6MNnyAaqxcckNfS5eh4j4",
+        "Chrono X1": "https://lh3.googleusercontent.com/aida-public/AB6AXuDRtGSr_7qDRz66qTYoCWtByO-D4juuYgWENvIGxYULztNcqfTX-52yjcvU8zYm6GdyzbzQWDHmCHFwgLfEHwiGJaUXFZ3zHf6-xeFD5t6OxIkVXc_eTduHw4hKWkI8euGu1tjR1qvI0eTKE8IQaWFfzOvuqAVjVqSIm7h-2QB1LTl8YjIiK6IhCJUueem3ouprKXko_ZMf_CKm9QT2pGKEPCBAWCWq77GcRDY1LSA3x5BvG_ZUexZk"
+    };
+
+    function handleIdChange() {
+        if (idInput.value < 1) idInput.value = 1;
+        inspectorNode.textContent = idInput.value;
+        fetchWishlistRecord(idInput.value);
+    }
+
+    async function fetchWishlistRecord(id) {
+        try {
+            const res = await fetch(`/api/wishlist/${id}`);
+            const data = await res.json();
+
+            if (!res.ok || data.error) {
+                displayBox.innerHTML = `
+                    <div class="col-span-full p-xl bg-surface shadow rounded-xl text-center text-text-muted border border-border-light w-full">
+                        <span class="material-symbols-outlined text-error text-[48px] block mb-xs">error</span>
+                        <p class="font-bold text-on-surface">Data Entry Missing</p>
+                        <p class="text-sm font-code text-error mt-xs">${data.error || 'Requested index path record not created.'}</p>
+                    </div>`;
+                return;
+            }
+
+            const assetUrl = productImages[data.product_name] || "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80";
+
+            displayBox.innerHTML = `
+                <div class="bg-surface rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group hover:-translate-y-1 border border-border-light col-span-full max-w-sm mx-auto w-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${assetUrl}" alt="${data.product_name}"/>
+                    </div>
+                    <div class="p-md">
+                        <span class="text-overline text-primary font-bold">MUTATED IDENTITY OWNER: USER_${data.user_id}</span>
+                        <h3 class="font-headline text-body font-bold text-on-surface mb-xs mt-xs">${data.product_name}</h3>
+                        <p class="font-body text-body-sm text-text-muted mb-md">Direct Table Row Reference Row ID: #${data.id}</p>
+                        <div class="flex items-center justify-between gap-md">
+                            <span class="font-headline text-subhead font-bold text-success">Active Row</span>
+                            <button class="bg-primary text-on-primary px-lg py-xs rounded-full font-body text-body-sm font-bold hover:bg-primary-container transition-colors fuchsia-glow">Add to Bag</button>
+                        </div>
+                    </div>
+                </div>`;
+        } catch (err) {
+            displayBox.innerHTML = `<div class="col-span-full p-xl bg-surface text-center text-error font-code shadow rounded-xl w-full">API Error: ${err.message}</div>`;
+        }
+    }
+
+    function simulateAttack() {
+        const fallbackTarget = Math.floor(Math.random() * 4) + 1; 
+        idInput.value = fallbackTarget;
+        handleIdChange();
+    }
+
+    // Run initial fetch on page load
+    fetchWishlistRecord(idInput.value);
+</script>
+</body>
+</html>

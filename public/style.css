@@ -1,0 +1,55 @@
+:root {
+    --bg-primary: #120e2e;
+    --bg-surface: #1e1947;
+    --accent: #bb86fc;
+    --text-main: #ffffff;
+    --text-muted: #a4a0c6;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    background-color: var(--bg-surface);
+    display: flex;
+    gap: 20px;
+    padding: 15px 40px;
+    border-bottom: 2px solid var(--accent);
+}
+.navbar a, .dropbtn {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-surface);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+    z-index: 1;
+    border: 1px solid var(--accent);
+}
+.dropdown-content a {
+    color: var(--text-main);
+    padding: 12px 16px;
+    display: block;
+}
+.dropdown-content a:hover { background-color: var(--bg-primary); }
+.dropdown:hover .dropdown-content { display: block; }
+.container { padding: 40px; max-width: 800px; margin: auto; }
+.card { background: var(--bg-surface); padding: 25px; border-radius: 8px; margin-top: 20px; }
+input, button { padding: 10px; border-radius: 4px; border: 1px solid var(--accent); margin: 5px 0; }
+input { width: 70%; background: #000; color: #fff; }
+button { background: var(--accent); color: var(--bg-primary); font-weight: bold; cursor: pointer; }

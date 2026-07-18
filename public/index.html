@@ -1,379 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bugsite - Enterprise Admin Portal</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopVibe | Energetic Fashion E-commerce</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Nunito+Sans:wght@400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                    "tertiary-fixed-dim": "#eec200",
+                    "tertiary": "#735c00",
+                    "tertiary-container": "#cea700",
+                    "on-secondary-fixed-variant": "#004e5a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "error": "#EF4444",
+                    "background": "#f9f9f9",
+                    "surface-container-low": "#f3f3f3",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffd6fd",
+                    "on-primary-fixed": "#36003e",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "on-secondary-fixed": "#001f25",
+                    "on-tertiary-fixed": "#231b00",
+                    "text-muted": "#525252",
+                    "on-surface": "#1a1c1c",
+                    "info": "#3B82F6",
+                    "border-light": "#E5E5E5",
+                    "on-primary-container": "#fffbff",
+                    "on-background": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#a2eeff",
+                    "surface-tint": "#a200ba",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-container": "#00616f",
+                    "primary-fixed-dim": "#fbabff",
+                    "on-tertiary-container": "#4e3e00",
+                    "surface-variant": "#e2e2e2",
+                    "surface-bright": "#f9f9f9",
+                    "success": "#22C55E",
+                    "text-main": "#171717",
+                    "tertiary-fixed": "#ffe083",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "primary": "#9e00b5",
+                    "surface-container-high": "#e8e8e8",
+                    "outline": "#847183",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed-dim": "#2fd9f4",
+                    "on-primary": "#ffffff",
+                    "secondary": "#006877",
+                    "on-primary-fixed-variant": "#7c008e",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#524251",
+                    "inverse-primary": "#fbabff",
+                    "border-medium": "#D4D4D4",
+                    "outline-variant": "#d6c0d3",
+                    "warning": "#F59E0B",
+                    "surface": "#FFFFFF",
+                    "primary-container": "#c028d7",
+                    "secondary-container": "#3fe1fd"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+                "spacing": {
+                    "lg": "24px",
+                    "xs": "4px",
+                    "section-mobile": "56px",
+                    "section-tablet": "80px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "2xl": "48px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "section-desktop": "112px",
+                    "base": "8px",
+                    "gutter": "24px"
+                },
+                "fontFamily": {
+                    "headline-mobile": ["Plus Jakarta Sans"],
+                    "body-sm": ["Nunito Sans"],
+                    "code": ["JetBrains Mono"],
+                    "display-mobile": ["Plus Jakarta Sans"],
+                    "overline": ["Nunito Sans"],
+                    "caption": ["Nunito Sans"],
+                    "display": ["Plus Jakarta Sans"],
+                    "body": ["Nunito Sans"],
+                    "subhead": ["Plus Jakarta Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "headline": ["Plus Jakarta Sans"]
+                },
+                "fontSize": {
+                    "headline-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "code": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "overline": ["11px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display": ["56px", {"lineHeight": "1.1", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                    "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "subhead": ["26px", {"lineHeight": "1.3", "letterSpacing": "0.005em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "700"}]
+                }
+              }
+            }
+          }
+    </script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .container { background: #1e293b; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); width: 100%; max-width: 1000px; min-height: 650px; display: flex; flex-direction: column; }
-        
-        h2 { margin-bottom: 20px; color: #fff; text-align: center; font-size: 26px; font-weight: 600; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 6px; color: #94a3b8; font-size: 14px; }
-        input { width: 100%; padding: 12px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; font-size: 16px; color: #fff; transition: border 0.2s; }
-        input:focus { border-color: #38bdf8; outline: none; }
-        
-        button { width: 100%; padding: 12px; background: #0284c7; border: none; color: white; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
-        button:hover { background: #0369a1; }
-        .btn-danger { background: #ef4444; }
-        .btn-danger:hover { background: #dc2626; }
-        .btn-secondary { background: #475569; }
-        .btn-secondary:hover { background: #334155; }
-        
-        .toggle-link { text-align: center; margin-top: 15px; font-size: 14px; color: #38bdf8; cursor: pointer; }
-        .hidden { display: none !important; }
-        .message { padding: 12px; margin-bottom: 20px; border-radius: 6px; text-align: center; font-size: 14px; display: none; font-weight: 500; }
-        .success { background: #064e3b; color: #a7f3d0; border: 1px solid #047857; }
-        .error { background: #7f1d1d; color: #fca5a5; border: 1px solid #b91c1c; }
-
-        /* Navigation Breadcrumbs */
-        .breadcrumb-nav { font-size: 14px; color: #94a3b8; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        .breadcrumb-link { color: #38bdf8; cursor: pointer; font-weight: 500; text-decoration: none; }
-        .breadcrumb-link:hover { text-decoration: underline; }
-
-        /* Business Dashboard Metrics Layout */
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 25px; }
-        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 25px; }
-        .metric-card { background: #0f172a; border: 1px solid #334155; padding: 20px; border-radius: 8px; }
-        .metric-card h4 { color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
-        .metric-val { font-size: 28px; font-weight: 700; color: #fff; }
-        
-        /* Layout Panels */
-        .card-menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .feature-card { background: #111827; border: 1px solid #334155; padding: 25px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
-        .feature-card h4 { font-size: 18px; color: #fff; margin-bottom: 8px; }
-        .feature-card p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; line-height: 1.5; }
-        
-        .action-btn { padding: 10px 16px; font-size: 14px; margin-top: auto; width: 100%; text-align: center; border-radius: 6px; }
-        
-        /* Toggle Switch Styling */
-        .vulnerability-control { background: #1e293b; border: 1px solid #475569; padding: 12px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #64748b; transition: .3s; border-radius: 22px; }
-        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
-        input:checked + .slider { background-color: #ef4444; }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        /* Dynamic Pages View Chamber */
-        .page-view-container { background: #111827; border: 1px solid #334155; padding: 25px; border-radius: 8px; flex-grow: 1; }
-        .page-title { font-size: 22px; color: #fff; margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-
-        /* Diagnostic Console Stream Output */
-        .console-box { background: #000; font-family: monospace; padding: 15px; border-radius: 6px; margin-top: auto; border: 1px solid #334155; max-height: 150px; overflow-y: auto; font-size: 13px; color: #38bdf8; }
-        .console-title { font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 5px; font-weight: bold; }
+        .fuchsia-glow {
+            box-shadow: 0 10px 15px -3px rgba(158, 0, 181, 0.2), 0 4px 6px -4px rgba(158, 0, 181, 0.1);
+        }
+        .fuchsia-glow:hover {
+            box-shadow: 0 20px 25px -5px rgba(158, 0, 181, 0.3), 0 8px 10px -6px rgba(158, 0, 181, 0.2);
+        }
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
     </style>
 </head>
-<body>
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
 
-<div class="container">
-    <div id="msgBox" class="message"></div>
-
-    <!-- Login Section -->
-    <div id="loginSection">
-        <h2>System Sign-In</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label>User Identifier (Username / Email)</label>
-                <input type="text" id="loginIdentifier" name="identifier" value="admin" required>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-full mx-auto bg-surface shadow-md transition-shadow duration-300">
+    <div class="flex items-center gap-xl">
+        <a class="font-headline text-subhead font-extrabold text-primary tracking-tight" href="/index.html">ShopVibe</a>
+        <div class="hidden md:flex items-center gap-lg">
+            <div class="relative nav-dropdown group h-full py-2">
+                <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
+                    Shop
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                </button>
+                <!-- Dropdown Content Pointed directly to pages/ modules folder -->
+                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                    <!-- Dropdown Home Option -->
+                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
+                        <span class="inline-block align-middle mr-1">🏠</span> Home
+                    </a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Password Verification</label>
-                <input type="password" id="loginPassword" name="password" value="password" required>
-            </div>
-            <button type="submit">Access Platform</button>
-        </form>
-        <div class="toggle-link" onclick="toggleForms()">Provision new testing account</div>
-    </div>
-
-    <!-- Register Section -->
-    <div id="registerSection" class="hidden">
-        <h2>Account Provisioning</h2>
-        <form id="registerForm">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" minlength="3" pattern="^[a-zA-Z0-9]+$" value="newUser">
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" value="test@bugsite.com">
-            </div>
-            <div class="form-group">
-                <label>Security Password</label>
-                <input type="password" name="password" value="Password123!">
-            </div>
-            <button type="submit">Create Account</button>
-        </form>
-        <div class="toggle-link" onclick="toggleForms()">Return to sign-in portal</div>
-    </div>
-
-    <!-- Real Business Context Dashboard Frame -->
-    <div id="dashboardSection" class="hidden" style="display: flex; flex-direction: column; flex-grow: 1;">
-        <div class="dashboard-header">
-            <div>
-                <h3 style="font-size: 22px; color: #fff;">Bugsite Corporate Portal</h3>
-                <span style="font-size: 13px; color: #94a3b8;">Session: <strong id="userDisplay" style="color: #34d399;">User</strong></span>
-            </div>
-            <button class="btn-danger" onclick="logout()" style="padding: 8px 16px; width: auto;">Logout</button>
+            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
+            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
         </div>
-        
-        <!-- MAIN HUB PAGE VIEW -->
-        <div id="page-hub" class="page-route">
-            <!-- Corporate Analytics Metrics -->
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <h4>Total Revenue</h4>
-                    <div class="metric-val" id="revenueCounter">$148,250</div>
-                </div>
-                <div class="metric-card">
-                    <h4>System Tasks Completed</h4>
-                    <div class="metric-val" id="stateCounter">0</div>
-                </div>
-                <div class="metric-card">
-                    <h4>Active Node Subscriptions</h4>
-                    <div class="metric-val">1,842</div>
-                </div>
-            </div>
+    </div>
+    <div class="flex items-center gap-md">
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">search</button>
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">person</button>
+        <div class="relative">
+            <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">shopping_cart</button>
+            <span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">3</span>
+        </div>
+    </div>
+</nav>
 
-            <div class="card-menu-grid">
-                <div class="feature-card">
-                    <h4>Buggie Burger Ordering Exploit</h4>
-                    <p>Simulate logic and validation exploits. Test order quantities with absolute frontend trust vulnerabilities.</p>
-                    <button class="action-btn" style="background: #e11d48;" onclick="navigateToPage('page-ordering')">Open Ordering System</button>
-                </div>
-                <div class="feature-card">
-                    <h4>Security Auditing Center</h4>
-                    <p>Toggle system query configurations and check authentication security boundaries or simulate remote database configuration vulnerabilities.</p>
-                    <button class="action-btn" onclick="navigateToPage('page-security')">Open Security Page</button>
-                </div>
-                <div class="feature-card">
-                    <h4>Ledger Synchronization Manager</h4>
-                    <p>Execute parallel transaction workflows, optimize relational table concurrency parameters, and inspect database lock performance metrics.</p>
-                    <button class="action-btn" style="background: #a855f7;" onclick="navigateToPage('page-ledger')">Open Ledger Page</button>
-                </div>
-                <div class="feature-card">
-                    <h4>Corporate Publishing Console</h4>
-                    <p>Broadcast organizational feed descriptions, manage real-time UI messaging tickers, and interface output pipeline streams.</p>
-                    <button class="action-btn" style="background: #eab308; color: #000;" onclick="navigateToPage('page-publishing')">Open Publishing Page</button>
+<main class="pt-[72px]">
+    <!-- Hero Section -->
+    <section class="relative w-full h-[85vh] overflow-hidden flex items-center">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center transition-transform duration-[10000ms] hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC1Mg290StayXpAPyMuzNkSBpLx0ZINEJf_LNJNr4tpxuKEYRhdYTfJf9PKorTjl_Aocn8fIOvCLWMjcJN7s9NuKTjn8Gxxu_YW4WWD2OzLmFQd8xhVPeZy5_mIcckTmgXQzRdv03W8WAz1-h4pO1fSUhwj4Oz3n3BRVr0ZIsWeVdKMXPHgcYoFmCvKjXcIjsvqLb-48pLAJ3HEKyNTJ3uXy2Leq0SHzE_Yl1aNOn9BjPR_qOKdhNIt')"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-on-surface/60 to-transparent"></div>
+        </div>
+        <div class="container mx-auto px-lg relative z-10">
+            <div class="max-w-2xl text-on-primary">
+                <span class="font-overline text-overline mb-md block text-primary-fixed-dim">NEW SEASON ARRIVALS</span>
+                <h1 class="font-headline text-display-mobile md:text-display mb-lg leading-tight">Elevate Your Vibe</h1>
+                <p class="font-body text-body-lg mb-2xl text-surface-container-highest max-w-lg">Discover the intersection of high-end aesthetics and energetic street style. Our latest collection is engineered for those who move fast and look better.</p>
+                <div class="flex flex-col sm:flex-row gap-md">
+                    <a href="/pages/catalog.html" class="bg-primary text-on-primary text-center font-headline text-body font-bold py-md px-3xl rounded-full fuchsia-glow active:scale-95 transition-all">
+                        Shop Now
+                    </a>
+                    <button class="border-2 border-white text-white font-headline text-body font-bold py-md px-3xl rounded-full hover:bg-white hover:text-on-surface transition-all active:scale-95">
+                        View Lookbook
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- SUB PAGE: ORDERING SYSTEM -->
-        <div id="page-ordering" class="page-route page-view-container hidden">
-            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Buggie Burger Shop</span></div>
-            <h3 class="page-title">Buggie Burger Checkout Panel</h3>
-            <div style="background: #1e293b; border: 1px solid #334155; padding: 20px; border-radius: 8px; max-width: 400px; margin: 0 auto;">
-                <p style="margin-bottom: 10px; font-size: 16px;">Price per Burger: <strong style="color: #38bdf8;">$100</strong></p>
-                
-                <div class="form-group">
-                    <label for="quantityInput">Order Quantity:</label>
-                    <input type="number" id="quantityInput" value="1" min="1" style="width: 100%; margin-top: 5px;">
+    <!-- Category Grid (Bento Style) -->
+    <section class="py-section-desktop container mx-auto px-lg">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+            <div class="md:col-span-8 group relative h-[500px] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASVcy6apdFWFoZIsy2gVP0UzawDVpQGge5gUGD6gfbxxy0_dvAvQNZUXPP01yl_w0_5T0CFw1dwHUNOf9iwKtN7mODWvFqzuNNfv7FoRdppg3Ts9n3zIFD3QYnSvuEc8lhnieYlt8CXxlC6DcaDmdcC6RIbnc1xIBBxutBi_v-mpXevg43IQEt5k-Ph2MB-XhyQk9fUPjIhquKxYHHNBJXUmPSmk7GKXLX3bw9AAuFIg2v5cDpF81Q')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-on-surface/70 via-transparent to-transparent"></div>
+                <div class="absolute bottom-lg left-lg">
+                    <h2 class="font-headline text-headline-mobile text-on-primary mb-xs">Summer Essentials</h2>
+                    <a href="/pages/catalog.html" class="font-body text-body text-surface-container-highest underline decoration-primary underline-offset-4">Explore Collection</a>
                 </div>
-                
-                <div class="vulnerability-control" style="margin-top: 15px; background: #0f172a;">
-                    <div>
-                        <span style="font-size: 13px; display: block; font-weight: 600;">Enable Backend Validation Fix</span>
-                        <span style="font-size: 11px; color: #94a3b8;">Blocks negative amounts from being processed.</span>
+            </div>
+            <div class="md:col-span-4 grid grid-rows-2 gap-gutter">
+                <div class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvplngMWpmbxgSFop3VTU9KDsCTeLCnwMuWBKGCKbwF5SXmtwudfsJoXS0V3VipCtQ0uCrosgnLTBfRbvoHKOST8LDbp9wQUNCxGljzoPkEJzO_g9_g9DksKGKmDa4jUvEpATwOerN8w9Z3m08rDvC1laPmE36JFs4gUPUhxtvMTxKqFMMDwCbxo9G-914XSAfZfx-d8Xok9iFu7o6446evRMpOusH0bPlvkFAOL_rl45tx67qWaSc')"></div>
+                    <div class="absolute inset-0 bg-on-surface/20 group-hover:bg-on-surface/40 transition-colors"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <a href="/pages/catalog.html" class="font-headline text-subhead text-white text-center px-md hover:underline">Trending Now</a>
                     </div>
-                    <label class="switch">
-                        <input type="checkbox" id="validationToggle">
-                        <span class="slider"></span>
-                    </label>
                 </div>
-
-                <button style="background: #22c55e; margin-top: 15px;" onclick="processOrder()">Place Secure Order</button>
-                <div id="orderStatus" style="margin-top: 15px; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; display: none;"></div>
+                <div class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrFVrniXQPIy_ZVbYlgiOJe57rcnMUuuAUev6_YtzJCWVWLfQsOr1_4UsLS3UqHzGg9lBlrHZHBwuQiBX4m6tjHtnEi6wyYSdcr4LYFgMA460DZQCiCv8APaMUUgN2Xxz8X9mCam6dhS-fXdQb1SSVCT8XC4nCKfcMiXzDA4Odivy0fafcEIW3obLof-mXqQu6n8A9ku2YSNMnGS8rfxmsVY3_km5Izb3-ZFxYuXKXDMLEscd6qiLb')"></div>
+                    <div class="absolute inset-0 bg-on-surface/20 group-hover:bg-on-surface/40 transition-colors"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <a href="/pages/catalog.html" class="font-headline text-subhead text-white text-center px-md hover:underline">Premium Active</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- SUB PAGE: SECURITY CENTER -->
-        <div id="page-security" class="page-route page-view-container hidden">
-            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Security Center</span></div>
-            <h3 class="page-title">Security Auditing Room</h3>
-            <div class="vulnerability-control">
+    <!-- Product Drops Carousel Mock -->
+    <section class="py-section-desktop bg-surface-container-low">
+        <div class="container mx-auto px-lg">
+            <div class="flex justify-between items-end mb-2xl">
                 <div>
-                    <span style="font-size: 14px; display: block; font-weight: 600;">Disable Query Parameterization</span>
-                    <span style="font-size: 11px; color: #94a3b8;">Exposes login API strings directly to dynamic concatenation validation vectors.</span>
+                    <span class="font-overline text-overline text-primary mb-xs block">CURATED FOR YOU</span>
+                    <h2 class="font-headline text-headline text-on-surface">Weekly Hot Drops</h2>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="sqliToggle" onchange="toggleSqlVulnerability(this.checked)">
-                    <span class="slider"></span>
-                </label>
             </div>
-            <button class="btn-danger" style="margin-top: 15px;" onclick="runSqliAttack()">Simulate Login Override Attack</button>
-        </div>
-
-        <!-- SUB PAGE: LEDGER MANAGER -->
-        <div id="page-ledger" class="page-route page-view-container hidden">
-            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Ledger Manager</span></div>
-            <h3 class="page-title">Ledger Synchronization Manager</h3>
-            <p style="font-size: 14px; color: #94a3b8; margin-bottom: 20px;">Fires heavy bulk writing modifications in parallel loops to cross-verify database row locking rules.</p>
-            <button style="background: #a855f7;" onclick="triggerDeadlockSimulation()">Batch Process Transactions Now</button>
-        </div>
-
-        <!-- SUB PAGE: PUBLISHING CONSOLE -->
-        <div id="page-publishing" class="page-route page-view-container hidden">
-            <div class="breadcrumb-nav"><span class="breadcrumb-link" onclick="navigateToPage('page-hub')">Dashboard</span> &gt; <span>Publishing Console</span></div>
-            <h3 class="page-title">Corporate Broadcast Feed</h3>
-            <div class="form-group">
-                <label>Add Public System Announcement</label>
-                <input type="text" id="announcementInput" placeholder="Enter message text script parameters...">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <!-- Product Card 1 -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                    <div class="relative h-[400px] overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ7xyGiKcuyEQ6HP6vu1bV8f9W9fYZpPfIxlSVYGg3GTUQQrbVUzMWAfXF-1mzsaJdRrFr0BDf8fENE9PQFnXPlpFMbaItU_BdlWUpHPbSKEMIE6U4_ev5095X1f3siifnMsvZyxnriB71CrRBopZmagQmG7LRjNIJTU2SjGtVsTc3H7cD6dLnWXHPTL3EOQRPxZKPj56kuATd_9sC-XsUBNoAapNYab1ATsnr9zq8PRdZEqqCPl_o"/>
+                        <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-xs">
+                            <h4 class="font-headline text-body font-bold text-on-surface">Architectural Blazer</h4>
+                            <span class="font-body text-body font-bold text-primary">$249.00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                    <div class="relative h-[400px] overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDrw-HW_NZg9H6bE_jQOmFXVV3M2YWxOWuVJJCEk_EYbkW6fwda_2cXvF3xl5JHpo-czEN3wsHY4BzXu0GqS3DMuB4jGlD9-c7wynXxfhlQ22ojai55ERskL5MiNYzpvYtCM2NW8-AWMY71C1yZfHI0eTAWImBGtUXGSLPexNGd0uQRhz5FCOnOUARbtiCQb_xvcOX6HOAEJKxVOPclDiLPDXmQF9D7_Rij5pk1jx-ZjScZVkZaEI-"/>
+                        <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-xs">
+                            <h4 class="font-headline text-body font-bold text-on-surface">Vibe-Max Sneakers</h4>
+                            <span class="font-body text-body font-bold text-primary">$185.00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                    <div class="relative h-[400px] overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHLIO8a_sFd7CsFbjCFhHBurqf8NWZgqrjyMRs10bhKFDYMQhfyvAHU4erjB-8TlC_XR0mpY8GBM3JkJfACHb_oR3E2J0NLl3MVDYNvNiFrhc1QFOrjUZTz4Y5PIF9-JD3okNrtUdk3wbAo6ILDIo0lYfQ80hmgAkdc9Lup3CXZ80g9LtmHzsr8QTDTn2UMS-J2BfIRH905EXMUtCYJ9XK4ug_iyvmB8WBGDVcBEcv081wd8iqGnPP"/>
+                        <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-xs">
+                            <h4 class="font-headline text-body font-bold text-on-surface">Atomic Tech Hoodie</h4>
+                            <span class="font-body text-body font-bold text-primary">$120.00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                    <div class="relative h-[400px] overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Xjdu4byGjlK9RTMRQ6CS2XqQrO4oCt7QiV0_Z27bHwrk23pZawhYI4BwPNjXR4zXtMdG8NdO0LNuPIeFg53nmrFfb_Es5omJHVIOHvgPgBqbRxpIeoA7WpZoLmLsXYQvXdI0vZKnoTEiZvRPDOXZrZiDCUFJhSikUho47eB_nPcH-hJCICduupHmhVcjrci05pu7nQHJTjPMrqWPaGdr7fMO6elqxiPMzyHKPPdTR4USCfIlKRI2"/>
+                        <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                        </div>
+                    </div>
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-xs">
+                            <h4 class="font-headline text-body font-bold text-on-surface">Icon Mini Tote</h4>
+                            <span class="font-body text-body font-bold text-primary">$340.00</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button style="background: #eab308; color: #000;" onclick="triggerDOMInjection()">Publish Announcement</button>
         </div>
+    </section>
 
-        <!-- Telemetry System Output Stream -->
-        <div class="console-title">Live System Operations Event Stream</div>
-        <div id="logConsole" class="console-box">> System online. Simulation environment ready.</div>
+    <!-- Subscription Area -->
+    <section class="container mx-auto px-lg py-section-desktop">
+        <div class="relative rounded-[32px] overflow-hidden h-[400px] flex items-center p-2xl">
+            <div class="absolute inset-0 bg-primary/10 backdrop-blur-[2px]"></div>
+            <div class="relative z-10 max-w-xl">
+                <h2 class="font-headline text-headline text-on-surface mb-md">Join the Vibe Tribe</h2>
+                <p class="font-body text-body mb-lg text-on-surface-variant">Unlock exclusive early access, member-only drops, and 15% off your first order.</p>
+                <div class="flex gap-sm">
+                    <input class="flex-1 bg-surface/60 backdrop-blur-md border-border-medium focus:border-primary focus:ring-1 focus:ring-primary rounded-xl px-lg py-md font-body text-body" placeholder="Enter your email" type="email"/>
+                    <button class="bg-on-surface text-on-primary font-headline text-body font-bold px-2xl py-md rounded-xl hover:bg-primary transition-all active:scale-95">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full px-lg py-3xl flex flex-col items-center text-center gap-md bg-surface-container-highest border-t border-border-light">
+    <div class="font-headline text-headline-mobile text-on-surface font-extrabold tracking-tight mb-md">ShopVibe</div>
+    <div class="flex flex-wrap justify-center gap-xl mb-xl">
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/catalog.html">Catalog (SQLi)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/deals.html">Deals (Race Condition)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/compare.html">Compare (SSRF)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/reviews.html">Reviews (Stored XSS)</a>
     </div>
-</div>
+    <div class="max-w-3xl border-t border-border-medium pt-lg w-full">
+        <p class="font-body text-body-sm text-text-muted mb-xs">© 2026 ShopVibe Atomic Vulnerability Architecture Lab. All Rights Reserved.</p>
+        <p class="font-code text-caption text-outline opacity-60">System Status: DEPLOYED (V-CORE 1.0.4) // Secure Layer: ATOMIC_MODE_ACTIVE</p>
+    </div>
+</footer>
 
 <script>
-    const loginSection = document.getElementById('loginSection');
-    const registerSection = document.getElementById('registerSection');
-    const dashboardSection = document.getElementById('dashboardSection');
-    const msgBox = document.getElementById('msgBox');
-    const userDisplay = document.getElementById('userDisplay');
-    const logConsole = document.getElementById('logConsole');
-    const stateCounter = document.getElementById('stateCounter');
-    const revenueCounter = document.getElementById('revenueCounter');
-
-    let currentRevenue = 148250;
-    let completedTasks = 0;
-
-    // Navigation Page Engine
-    function navigateToPage(pageId) {
-        document.querySelectorAll('.page-route').forEach(page => {
-            page.classList.add('hidden');
-        });
-        document.getElementById(pageId).classList.remove('hidden');
-        writeToConsole(`Navigated view context window target: ${pageId}`);
-    }
-
-    function toggleForms() {
-        loginSection.classList.toggle('hidden');
-        registerSection.classList.toggle('hidden');
-        dashboardSection.classList.add('hidden');
-        msgBox.style.display = 'none';
-    }
-
-    function showMessage(text, isSuccess) {
-        msgBox.textContent = text;
-        msgBox.className = `message ${isSuccess ? 'success' : 'error'}`;
-        msgBox.style.display = 'block';
-    }
-
-    function writeToConsole(logMessage, color = "#38bdf8") {
-        const timestamp = new Date().toLocaleTimeString();
-        logConsole.innerHTML += `<br><span style="color: ${color}">> [${timestamp}] ${logMessage}</span>`;
-        logConsole.scrollTop = logConsole.scrollHeight;
-    }
-
-    // Completely Backendless Sign-In
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const usernameInput = document.getElementById('loginIdentifier').value;
-        
-        loginSection.classList.add('hidden');
-        registerSection.classList.add('hidden');
-        msgBox.style.display = 'none';
-        
-        userDisplay.textContent = usernameInput || "AdminUser";
-        dashboardSection.classList.remove('hidden');
-        navigateToPage('page-hub');
-        
-        writeToConsole(`Authorized session simulated and successfully established.`);
-    });
-
-    // Completely Backendless Sign-Up
-    document.getElementById('registerForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        showMessage("Account dynamically provisioned locally!", true);
-        setTimeout(toggleForms, 1200);
-    });
-
-    function logout() {
-        dashboardSection.classList.add('hidden');
-        loginSection.classList.remove('hidden');
-        document.getElementById('sqliToggle').checked = false;
-        showMessage("Session terminated successfully.", true);
-    }
-
-    // ==========================================
-    // BUG-HUNTING WORKFLOW INTERACTIVE LABORATORY
-    // ==========================================
-
-    function processOrder() {
-        const qty = Number(document.getElementById('quantityInput').value);
-        const isValidationFixed = document.getElementById('validationToggle').checked;
-        const statusDiv = document.getElementById('orderStatus');
-        
-        statusDiv.style.display = "block";
-        writeToConsole(`Processing dispatch event payload parameter: { quantity: ${qty} }`, "#fbbf24");
-
-        if (isValidationFixed && qty <= 0) {
-            statusDiv.style.background = "#7f1d1d";
-            statusDiv.style.color = "#fca5a5";
-            statusDiv.innerHTML = "Error: Validation Fault! Quantity cannot be 0 or negative.";
-            writeToConsole(`[REJECTED] Validation rule intercepted safe index boundary parameters.`, "#ef4444");
-            return;
-        }
-
-        const cost = qty * 100;
-        currentRevenue += cost;
-        completedTasks++;
-        
-        revenueCounter.textContent = `$${currentRevenue.toLocaleString()}`;
-        stateCounter.textContent = completedTasks;
-
-        statusDiv.style.background = "#064e3b";
-        statusDiv.style.color = "#a7f3d0";
-        statusDiv.innerHTML = `Success! Charged: $${cost}`;
-        
-        if (cost < 0) {
-            writeToConsole(`[BUG DETECTED] Negative calculation payload parsed. Financial total corrupted: $${cost}`, "#ef4444");
+    // Header Blur Effect on Scroll
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('bg-surface/95', 'backdrop-blur-md');
         } else {
-            writeToConsole(`Transaction balance finalized. Total generated: $${cost}`, "#34d399");
+            nav.classList.remove('bg-surface/95', 'backdrop-blur-md');
         }
-    }
-
-    function toggleSqlVulnerability(isEnabled) {
-        writeToConsole(
-            isEnabled ? "[WARNING] Parameterization disabled. Concatenation parsing vectors open." : "[SAFE] Query context parameterized filters secured.", 
-            isEnabled ? "#ef4444" : "#34d399"
-        );
-    }
-
-    function runSqliAttack() {
-        writeToConsole("Injecting alternative override bypass string metrics...", "#fbbf24");
-        logout();
-        document.getElementById('loginIdentifier').value = "' OR '1'='1";
-        document.getElementById('loginPassword').value = "override";
-        writeToConsole("Bypassing query structure strings directly...", "#ef4444");
-        setTimeout(() => { document.getElementById('loginForm').dispatchEvent(new Event('submit')); }, 500);
-    }
-
-    function triggerDeadlockSimulation() {
-        writeToConsole("Dispatching concurrent row modifications (Transactions A and B)...", "#c084fc");
-        setTimeout(() => {
-            writeToConsole("!! DATABASE CRITICAL TRANSACTION DEADLOCK ENCOUNTERED !!", "#ef4444");
-            writeToConsole(`Aborted Transaction Handle: TX_POOL_99A`, "#fbbf24");
-            writeToConsole(`MySQL Native Code Error Flag: ER_LOCK_DEADLOCK`, "#c084fc");
-        }, 600);
-    }
-
-    function triggerDOMInjection() {
-        const inputField = document.getElementById('announcementInput');
-        const rawTextPayload = inputField.value;
-        if (!rawTextPayload) return;
-        
-        writeToConsole(`Publishing layout payload straight to DOM container...`);
-        logConsole.innerHTML += `<br><span style="color: #ef4444">> Feed Update: ${rawTextPayload}</span>`;
-        inputField.value = '';
-    }
+    });
 </script>
 </body>
 </html>

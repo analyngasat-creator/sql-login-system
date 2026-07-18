@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ShopVibe Catalog | Security Sandbox</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "tertiary-fixed-dim": "#eec200",
+                        "tertiary": "#735c00",
+                        "tertiary-container": "#cea700",
+                        "on-secondary-fixed-variant": "#004e5a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "error": "#EF4444",
+                        "background": "#f9f9f9",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#ffd6fd",
+                        "on-primary-fixed": "#36003e",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed": "#001f25",
+                        "on-tertiary-fixed": "#231b00",
+                        "text-muted": "#525252",
+                        "on-surface": "#1a1c1c",
+                        "info": "#3B82F6",
+                        "border-light": "#E5E5E5",
+                        "on-primary-container": "#fffbff",
+                        "on-background": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#a2eeff",
+                        "surface-tint": "#a200ba",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-container": "#00616f",
+                        "primary-fixed-dim": "#fbabff",
+                        "on-tertiary-container": "#4e3e00",
+                        "surface-variant": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "success": "#22C55E",
+                        "text-main": "#171717",
+                        "tertiary-fixed": "#ffe083",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "primary": "#9e00b5",
+                        "surface-container-high": "#e8e8e8",
+                        "outline": "#847183",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed-dim": "#2fd9f4",
+                        "on-primary": "#ffffff",
+                        "secondary": "#006877",
+                        "on-primary-fixed-variant": "#7c008e",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#524251",
+                        "inverse-primary": "#fbabff",
+                        "border-medium": "#D4D4D4",
+                        "outline-variant": "#d6c0d3",
+                        "warning": "#F59E0B",
+                        "surface": "#FFFFFF",
+                        "primary-container": "#c028d7",
+                        "secondary-container": "#3fe1fd"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "section-mobile": "56px",
+                        "section-tablet": "80px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "3xl": "64px",
+                        "md": "16px",
+                        "section-desktop": "112px",
+                        "base": "8px",
+                        "gutter": "24px"
+                },
+                "fontFamily": {
+                        "headline-mobile": ["plusJakartaSans"],
+                        "body-sm": ["nunitoSans"],
+                        "code": ["jetbrainsMono"],
+                        "display-mobile": ["plusJakartaSans"],
+                        "overline": ["nunitoSans"],
+                        "caption": ["nunitoSans"],
+                        "display": ["plusJakartaSans"],
+                        "body": ["nunitoSans"],
+                        "subhead": ["plusJakartaSans"],
+                        "body-lg": ["nunitoSans"],
+                        "headline": ["plusJakartaSans"]
+                },
+                "fontSize": {
+                        "headline-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "code": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "overline": ["11px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display": ["56px", {"lineHeight": "1.1", "letterSpacing": "0.02em", "fontWeight": "800"}],
+                        "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "subhead": ["26px", {"lineHeight": "1.3", "letterSpacing": "0.005em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "700"}]
+                }
+              },
+            },
+          }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fuchsia-glow:hover {
+            box-shadow: 0 10px 25px -5px rgba(158, 0, 181, 0.25);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .nav-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-full mx-auto bg-surface shadow-md transition-shadow duration-300">
+    <div class="flex items-center gap-xl">
+        <a class="font-headline text-subhead font-extrabold text-primary tracking-tight" href="/index.html">ShopVibe</a>
+        <div class="hidden md:flex items-center gap-lg">
+            <div class="relative nav-dropdown group h-full py-2">
+                <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
+                    Shop
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                </button>
+                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
+                        <span class="inline-block align-middle mr-1">🏠</span> Home
+                    </a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                </div>
+            </div>
+            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
+            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
+        </div>
+    </div>
+    <div class="flex items-center gap-md">
+        <button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-colors" data-icon="shopping_cart">shopping_cart</button>
+        <button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-colors" data-icon="person">person</button>
+    </div>
+</nav>
+
+<main class="pt-[100px] pb-section-desktop px-lg max-w-7xl mx-auto">
+<!-- Educational Header -->
+<header class="mb-3xl border-b border-border-light pb-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h1 class="font-headline text-headline text-on-surface mb-xs">Product Catalog</h1>
+<p class="text-text-muted font-body-lg">Curated fashion essentials for the modern lifestyle.</p>
+</div>
+<div class="bg-primary-container/10 border border-primary-container p-md rounded-xl flex items-center gap-md">
+<div class="bg-primary p-2 rounded-lg text-on-primary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div>
+<span class="block font-headline text-sm font-bold text-primary">SQLi Sandbox Mode</span>
+<span class="text-caption text-on-surface-variant">Understanding input sanitation and parameterized queries</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 flex-shrink-0 space-y-lg">
+<div>
+<h3 class="font-headline text-body font-bold mb-md">Categories</h3>
+<div class="space-y-sm">
+<label class="flex items-center gap-sm group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded-lg border-medium text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary transition-colors">All Products</span>
+</label>
+<label class="flex items-center gap-sm group cursor-pointer">
+<input class="w-5 h-5 rounded-lg border-medium text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary transition-colors">Outerwear</span>
+</label>
+<label class="flex items-center gap-sm group cursor-pointer">
+<input class="w-5 h-5 rounded-lg border-medium text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary transition-colors">Footwear</span>
+</label>
+<label class="flex items-center gap-sm group cursor-pointer">
+<input class="w-5 h-5 rounded-lg border-medium text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary transition-colors">Accessories</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-headline text-body font-bold mb-md">Price Range</h3>
+<div class="px-2">
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<div class="flex justify-between mt-sm text-caption text-text-muted">
+<span>$0</span>
+<span>$500+</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-headline text-body font-bold mb-md">Size</h3>
+<div class="grid grid-cols-4 gap-xs">
+<button class="py-2 border border-border-medium rounded-lg text-caption hover:border-primary hover:text-primary transition-all">XS</button>
+<button class="py-2 border border-border-medium rounded-lg text-caption hover:border-primary hover:text-primary transition-all">S</button>
+<button class="py-2 border border-primary bg-primary text-on-primary rounded-lg text-caption">M</button>
+<button class="py-2 border border-border-medium rounded-lg text-caption hover:border-primary hover:text-primary transition-all">L</button>
+</div>
+</div>
+<div class="pt-lg border-t border-border-light">
+<div class="bg-surface-container p-md rounded-xl">
+<h4 class="font-headline text-sm font-bold mb-xs">Refine Search</h4>
+<p class="text-caption text-on-surface-variant mb-md">Use the live query tool to simulate database requests.</p>
+<button class="w-full py-2 bg-on-surface text-surface rounded-full text-caption font-bold hover:scale-95 transition-transform" onclick="clearFilters()">Clear Filters</button>
+</div>
+</div>
+</aside>
+<!-- Product Canvas -->
+<section class="flex-grow">
+<!-- Sandbox Search Bar -->
+<div class="mb-xl bg-white shadow-md rounded-2xl p-md border border-primary-container/20">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center justify-between px-sm">
+<span class="text-overline text-primary">SQL Sandbox Query Input</span>
+<span class="text-code-display font-code text-caption text-info">SELECT * FROM products WHERE name LIKE '%[query]%'</span>
+</div>
+<div class="relative flex gap-sm">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-surface-container-highest focus:border-primary focus:ring-0 transition-all font-code text-sm" id="sandbox-search" placeholder="Enter product name (or try an injection...)" type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-lg rounded-xl font-bold hover:bg-primary-container transition-colors shadow-lg active:scale-95" onclick="fetchCatalog()">Fetch</button>
+</div>
+</div>
+</div>
+<!-- Product Grid -->
+<div id="product-grid" class="bento-grid">
+<!-- Data will inject here dynamically -->
+</div>
+<!-- Pagination -->
+<div class="mt-3xl flex justify-center items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">3</button>
+<span class="px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full px-lg py-3xl flex flex-col items-center text-center gap-md bg-surface-container-highest border-t border-border-light dark:bg-inverse-surface dark:border-outline">
+<span class="font-headline text-headline-mobile text-on-surface dark:text-inverse-on-surface font-extrabold tracking-tight">ShopVibe</span>
+<div class="flex flex-wrap justify-center gap-lg max-w-2xl mx-auto">
+<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/catalog.html">Catalog (SQLi)</a>
+<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/deals.html">Deals (Race Condition)</a>
+<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/compare.html">Compare (SSRF)</a>
+<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="#">Privacy Policy</a>
+</div>
+<p class="font-body text-body-sm text-text-muted mt-lg">© 2026 ShopVibe Atomic Vulnerability Architecture Lab. All Rights Reserved.</p>
+</footer>
+<script>
+        const searchInput = document.getElementById('sandbox-search');
+        const queryDisplay = document.querySelector('.text-code-display');
+
+        const productImages = {
+            "Stealth Puffer": "https://lh3.googleusercontent.com/aida-public/AB6AXuByqfEBZqHdlhCQyeq2Bxk9bN6gCIgKh1NimVwJCrYLJicb7lHv-fpn0NodefjY6Aw5lhG6xqAWmpSckuWTexfPztn085RxLcbWN5xdyqAc4SK4utBFuuiRJewViOaxF0IZTC8iwylxdiWLFeJS4fJdavOI6NPFm5TCCM-Pw7pHYthA_qwZ_rgq6Bx6xDancEsy4g0lWFVl7MONhyqcIq9o-WRo5OK6lIySrY-j3HCGR3MkonbP2SOy",
+            "Neon Kicks": "https://lh3.googleusercontent.com/aida-public/AB6AXuDqta0Is-Ab2q3yG_GtH4LrFjYr2uBVTrpsEvM8BqyNNa7qzXmhQjeUL0lv5T3EKiQz9fBBOW3lMdAYKU4tikNvm-8FGbAMkSmMhIm25iuhm465Qg646KpCkKxU_VAYGTAOfpiDtVucJy4DhW89vNjSeKBiV5BkTUJDMWQRvgi2h-LtbPPhzChiBa6yQqDNtQthvZazfdl1xeA-K_jLv-ZzvENGxRxlRx8Ij9qFIxlx6TampLuL1e7Y",
+            "Core Hoodie": "https://lh3.googleusercontent.com/aida-public/AB6AXuC-ydX44K_JXCu_PPmTlt-Uc_fP_wMyayR0etjf-mDwIWrxZJ2LCowAeD0RwA2zi1UuRY2o_ght480gOzDY1GhNvOXpxzkVFjV1LvW44pDx4hHj1YkF4mk-abJh98aEQVrGwTeR7UdLfY5eod-Re3BbEVX384b4tcxcWOW-d2aCuhpVmarz-HQR4JL3XXsoMYhU8KxN75krpwBfgROqNPpkTNmWnsjdTwy6MNnyAaqxcckNfS5eh4j4",
+            "Chrono X1": "https://lh3.googleusercontent.com/aida-public/AB6AXuDRtGSr_7qDRz66qTYoCWtByO-D4juuYgWENvIGxYULztNcqfTX-52yjcvU8zYm6GdyzbzQWDHmCHFwgLfEHwiGJaUXFZ3zHf6-xeFD5t6OxIkVXc_eTduHw4hKWkI8euGu1tjR1qvI0eTKE8IQaWFfzOvuqAVjVqSIm7h-2QB1LTl8YjIiK6IhCJUueem3ouprKXko_ZMf_CKm9QT2pGKEPCBAWCWq77GcRDY1LSA3x5BvG_ZUexZk"
+        };
+
+        searchInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            if (value.includes("'") || value.includes("--") || value.toLowerCase().includes("union")) {
+                queryDisplay.classList.remove('text-info');
+                queryDisplay.classList.add('text-error');
+                queryDisplay.innerHTML = `SELECT * FROM products WHERE name LIKE '%<span class="font-bold underline">${value}</span>%' <span class="bg-error/20 px-1 rounded ml-2">Potential Injection Detected</span>`;
+            } else {
+                queryDisplay.classList.remove('text-error');
+                queryDisplay.classList.add('text-info');
+                queryDisplay.textContent = `SELECT * FROM products WHERE name LIKE '%${value || '[query]'}%'`;
+            }
+        });
+
+        async function fetchCatalog() {
+            const query = searchInput.value;
+            const grid = document.getElementById('product-grid');
+            
+            try {
+                const res = await fetch(`/api/catalog/search?q=${encodeURIComponent(query)}`);
+                const items = await res.json();
+                
+                grid.innerHTML = '';
+
+                if (!items || items.length === 0 || items.error) {
+                    grid.innerHTML = `<div class="col-span-full p-xl bg-surface shadow rounded-xl text-center text-text-muted">No items found matching the criteria. ${items.error ? '<br><span class="text-error font-code">'+items.error+'</span>' : ''}</div>`;
+                    return;
+                }
+
+                items.forEach(item => {
+                    const fallbackImg = productImages[item.name] || "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80";
+                    const isSecret = item.price > 500;
+
+                    grid.innerHTML += `
+                        <div class="group bg-surface rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                            <div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${fallbackImg}" alt="${item.name}"/>
+                                ${isSecret ? `
+                                <div class="absolute top-4 left-4">
+                                    <span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">Secret Vault</span>
+                                </div>` : ''}
+                                <div class="absolute top-4 right-4">
+                                    <button class="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-sm text-on-surface hover:text-primary transition-colors" onclick="toggleHeart(this)">
+                                        <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-md">
+                                <div class="flex justify-between items-start mb-xs">
+                                    <h3 class="font-headline text-body font-bold text-on-surface">${item.name}</h3>
+                                    <span class="text-primary font-bold">$${item.price}</span>
+                                </div>
+                                <p class="text-caption text-text-muted mb-md">${item.description || 'Premium custom asset allocation context parameters.'}</p>
+                                <button class="w-full py-2 bg-surface-container-highest text-on-surface rounded-full text-caption font-bold group-hover:bg-primary group-hover:text-on-primary transition-all">Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                grid.innerHTML = `<div class="col-span-full p-xl bg-surface shadow rounded-xl text-center text-error">API Error: ${err.message}</div>`;
+            }
+        }
+
+        function toggleHeart(btn) {
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const isFilled = icon.style.fontVariationSettings?.includes("'FILL' 1");
+            icon.style.fontVariationSettings = isFilled ? "'FILL' 0" : "'FILL' 1";
+            icon.classList.toggle('text-primary');
+        }
+
+        function clearFilters() {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            fetchCatalog();
+        }
+
+        fetchCatalog();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-surface/95', 'backdrop-blur-md');
+            } else {
+                nav.classList.remove('bg-surface/95', 'backdrop-blur-md');
+            }
+        });
+    </script>
+</body>
+</html>

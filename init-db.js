@@ -1,35 +1,16 @@
-const mysql = require('mysql2/promise');
+const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
+const path = require('path');
 
-async function run() {
-    console.log("Attempting to connect to local MySQL server...");
-    
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '' 
-    });
-    
-    console.log("Successfully connected to MySQL server!");
-    console.log("Reading setup.sql file...");
-    
-    const sql = fs.readFileSync('setup.sql', 'utf8');
-    const statements = sql.split(';');
-    
-    for (let statement of statements) {
-        if (statement.trim()) {
-            // Using .query instead of .execute fixes the unsupported prepared statement protocol error
-            await connection.query(statement);
-        }
+const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'));
+
+const sql = fs.readFileSync(path.join(__dirname, 'setup.sql'), 'utf8');
+
+db.exec(sql, (err) => {
+    if (err) {
+        console.error("Database initialization failed:", err.message);
+    } else {
+        console.log("Database initialized successfully.");
     }
-    
-    console.log("Database and tables created successfully!");
-    await connection.end();
-}
-
-run().catch(err => {
-    console.error("\n[ERROR] Database connection failed!");
-    console.error("==========================================");
-    console.error(err);
-    console.error("==========================================");
+    db.close();
 });
