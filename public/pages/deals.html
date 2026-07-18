@@ -145,38 +145,33 @@
 <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-full mx-auto bg-surface shadow-md transition-shadow duration-300">
     <div class="flex items-center gap-xl">
         <a class="font-headline text-subhead font-extrabold text-primary tracking-tight" href="/index.html">ShopVibe</a>
-        <div class="hidden md:flex gap-lg items-center">
+        <div class="hidden md:flex items-center gap-lg">
             <div class="relative nav-dropdown group h-full py-2">
                 <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
-                    Shop
+                    Shop Lab Modules
                     <span class="material-symbols-outlined text-[18px]">expand_more</span>
                 </button>
-                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
-                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
-                        <span class="inline-block align-middle mr-1">🏠</span> Home
-                    </a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                <div class="dropdown-menu hidden absolute top-full left-0 pt-4 w-56 bg-transparent z-50">
+                    <div class="bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                        <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
+                            <span class="inline-block align-middle mr-1">🏠</span> Home
+                        </a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                    </div>
                 </div>
             </div>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
         </div>
     </div>
     <div class="flex items-center gap-md">
-        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">search</button>
-        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">person</button>
-        <div class="relative">
-            <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">shopping_cart</button>
-            <span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">3</span>
-        </div>
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95" onclick="window.location.href='/pages/wishlist.html'">shopping_cart</button>
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95" onclick="window.location.href='/pages/reviews.html'">person</button>
     </div>
 </nav>
 
-<!-- Main Content -->
 <main class="pt-[100px] pb-section-desktop max-w-7xl mx-auto px-lg">
     <header class="mb-3xl text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-lg">
         <div class="max-w-2xl">
@@ -185,21 +180,11 @@
                 <span class="font-overline uppercase">Race Condition Sandbox</span>
             </div>
             <h1 class="font-headline text-headline md:text-display text-on-surface mb-md">Limited Time Offers</h1>
-            <p class="font-body text-body-lg text-text-muted">
-                Test your transaction logic. These deals are high-demand and low-stock. Can your state management handle concurrent claims without data corruption? Use the code <code>SINGLE_USE_50</code> to exploit.
-            </p>
-        </div>
-        <div class="flex flex-col items-center md:items-end gap-xs p-md bg-surface border border-border-medium rounded-xl shadow-sm">
-            <span class="font-code text-caption text-secondary">EDUCATIONAL MODULE</span>
-            <span class="font-body text-body-sm font-bold">Mastering State & Locks</span>
-            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mt-xs">
-                <div class="bg-success h-full w-2/3"></div>
-            </div>
+            <p class="font-body text-body-lg text-text-muted">Test your transaction logic. Use code <code>SINGLE_USE_50</code> to test concurrent validation exploits.</p>
         </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-        <!-- Main Featured Deal (Bento Large) -->
         <div class="md:col-span-8 bg-surface rounded-xl overflow-hidden border border-border-light shadow-md fuchsia-glow transition-all flex flex-col md:flex-row group">
             <div class="md:w-1/2 h-64 md:h-auto relative">
                 <div class="bg-cover bg-center w-full h-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAU2zAzE2Rg2f8_3VDIAKPIIS2OpF32YzcMHOAIaLDvpMeFBdFF2IChYZHoL7tWbjtSm8zd_LeJYnSRvZR0-xdM9ZXruZIsEGTePKNSYayZXl93lQCpBaaCyIq_H5n_u9eMiVNEgTTxprAnslP8Mw8bWiyZQlxij1WkzuAHtK7HlcLiISD__75svShCi9p5RifJU7qbWC-ehxVAUKqmsNM-1DYrHZ2pfbhcNYKn0m6DOTsPljaNOFd0')"></div>
@@ -210,94 +195,57 @@
             </div>
             <div class="md:w-1/2 p-2xl flex flex-col justify-between">
                 <div>
-                    <div class="flex justify-between items-start mb-sm">
-                        <span class="font-overline text-primary">FEATURED DROP</span>
-                        <span class="px-sm py-[2px] bg-warning/10 text-warning font-bold rounded text-[10px]">COUPON REDEMPTION</span>
-                    </div>
-                    <h2 class="font-headline text-subhead mb-md" id="featured-title">Aura Chrono-Link V2</h2>
-                    <p class="font-body text-body text-text-muted mb-lg">Enter coupon values directly to claim discount transactions inside database instances.</p>
-                    <input type="text" id="coupon-input" value="SINGLE_USE_50" class="w-full mb-md px-md py-sm font-code text-sm rounded-xl border-2 border-surface-container-highest focus:border-primary focus:ring-0 transition-all bg-background text-on-surface" placeholder="Enter coupon code..."/>
+                    <h2 class="font-headline text-subhead mb-md">Aura Chrono-Link V2</h2>
+                    <input type="text" id="coupon-input" value="SINGLE_USE_50" class="w-full mb-md px-md py-sm font-code text-sm rounded-xl border-2 border-surface-container-highest focus:border-primary focus:ring-0 bg-background" placeholder="Enter coupon code..."/>
                 </div>
                 <button class="w-full py-md px-lg bg-primary text-on-primary rounded-full font-headline font-bold text-body hover:bg-primary-container transition-all flex justify-center items-center gap-sm active:scale-95" onclick="triggerCouponClaim(this)">
                     Claim Coupon Deal
-                    <span class="material-symbols-outlined">shopping_cart_checkout</span>
                 </button>
             </div>
         </div>
 
-        <!-- Side Bento Card -->
         <div class="md:col-span-4 bg-surface rounded-xl p-lg border border-border-light shadow-md fuchsia-glow transition-all flex flex-col gap-md relative">
             <div class="h-40 rounded-lg overflow-hidden">
                 <div class="bg-cover bg-center w-full h-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvKLYdj4FdPyHGINNJtDuMXoafrTH-KgruQyUHuQ3LVOtjkVXqATpkgt-oNruyVT6hGtInJwaolHiv5rrbPfzf0d3a3IgndCZgQrT7ohqg9VnseH6XHCMTvR6qQdGIzAW1AXHc_2Yny2gNkBExFy1RTZ1gnUiD3rfrGMuCYcSN2eFdf3FsGl0KryjWmk3EdVluIaJYpe70MA3vmNzvIqjNmN_S_fL7__c42vyi7YS0M5-cBJbLXTot')"></div>
             </div>
-            <div>
-                <div class="flex justify-between items-center mb-xs">
-                    <span class="font-code text-caption text-error font-bold">CONCURRENT API BLAST</span>
-                    <span class="font-body text-body-sm text-text-muted">Exploit Tool</span>
-                </div>
-                <h3 class="font-headline text-body-lg font-bold">Race Condition Exploiter</h3>
-                <p class="text-caption text-text-muted">Sends 10 concurrent requests at the same millisecond to bypass used_count validations.</p>
-            </div>
-            <button class="mt-auto w-full py-sm bg-on-surface text-surface rounded-lg font-body font-bold text-body-sm hover:opacity-90 transition-all flex justify-center items-center gap-xs" onclick="exploitRaceCondition(this)">
+            <button class="mt-auto w-full py-sm bg-on-surface text-surface rounded-lg font-body font-bold text-body-sm hover:opacity-90 transition-all" onclick="exploitRaceCondition(this)">
                 Launch Concurrency Attack
             </button>
         </div>
     </div>
 
-    <!-- System Log (Sandbox Interface) -->
     <section class="mt-3xl">
         <div class="bg-inverse-surface text-inverse-on-surface rounded-xl p-lg shadow-2xl overflow-hidden">
-            <div class="flex items-center justify-between mb-lg border-b border-white/10 pb-md">
-                <div class="flex items-center gap-sm">
-                    <span class="material-symbols-outlined text-primary-fixed-dim">terminal</span>
-                    <h3 class="font-code font-bold">TRANSACTION_WATCHDOG_V1.0</h3>
-                </div>
-                <div class="flex gap-sm">
-                    <div class="w-3 h-3 rounded-full bg-error"></div>
-                    <div class="w-3 h-3 rounded-full bg-warning"></div>
-                    <div class="w-3 h-3 rounded-full bg-success"></div>
-                </div>
-            </div>
             <div class="font-code text-body-sm space-y-2 h-48 overflow-y-auto" id="log-console">
-                <div class="text-surface-variant opacity-50">-- System initialized --</div>
-                <div class="text-success">[INFO] Atomic transaction layer monitoring active.</div>
-                <div class="text-inverse-on-surface">Waiting for user interaction...</div>
+                <div class="text-success">[INFO] Monitoring transactional endpoints active.</div>
             </div>
         </div>
     </section>
 </main>
 
-<!-- Footer -->
 <footer class="w-full px-lg py-3xl flex flex-col items-center text-center gap-md bg-surface-container-highest border-t border-border-light">
     <span class="font-headline text-headline-mobile text-on-surface">ShopVibe</span>
     <div class="flex flex-wrap justify-center gap-lg">
-        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/catalog.html">Catalog (SQLi)</a>
-        <a class="font-body text-body-sm text-primary font-bold transition-all duration-200" href="/pages/deals.html">Deals (Race Condition)</a>
-        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/compare.html">Compare (SSRF)</a>
-        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/wishlist.html">Wishlist (IDOR)</a>
-        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary" href="/pages/catalog.html">Catalog (SQLi)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary" href="/pages/deals.html">Deals (Race Condition)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary" href="/pages/compare.html">Compare (SSRF)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+        <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary" href="/pages/reviews.html">Reviews (Stored XSS)</a>
     </div>
-    <p class="font-body text-body-sm text-text-muted max-w-md mt-md">© 2026 ShopVibe Atomic Vulnerability Architecture Lab. All Rights Reserved.</p>
+    <p class="font-body text-body-sm text-text-muted max-w-md mt-md">© 2026 ShopVibe Architecture Lab.</p>
 </footer>
 
 <script>
     function addLog(msg, colorClass) {
         const consoleEl = document.getElementById('log-console');
         const div = document.createElement('div');
-        const time = new Date().toLocaleTimeString();
         div.className = `${colorClass} flex gap-2`;
-        div.innerHTML = `<span class="opacity-30">[${time}]</span> <span>${msg}</span>`;
+        div.innerHTML = `<span>${msg}</span>`;
         consoleEl.prepend(div);
     }
 
-    // Single click handler connecting dynamically to Express router logic
     async function triggerCouponClaim(btn) {
         const codeValue = document.getElementById('coupon-input').value;
-        
-        btn.disabled = true;
-        btn.classList.add('opacity-50');
-        addLog(`[TXN] Initiating request to application router for code: ${codeValue}`, 'text-inverse-on-surface');
-
         try {
             const res = await fetch('/api/deals/claim', {
                 method: 'POST',
@@ -305,63 +253,28 @@
                 body: JSON.stringify({ code: codeValue })
             });
             const data = await res.json();
-
-            if (res.ok) {
-                addLog(`[SUCCESS] Backend confirmation: ${data.message}`, 'text-success');
-            } else {
-                addLog(`[REJECTED] Validation rule failed: ${data.error}`, 'text-error');
-            }
-        } catch (err) {
-            addLog(`[ABORT] Network interaction exception error: ${err.message}`, 'text-error');
-        } finally {
-            btn.disabled = false;
-            btn.classList.remove('opacity-50');
-        }
+            if (res.ok) addLog(`[SUCCESS] Claim status: ${data.message}`, 'text-success');
+            else addLog(`[REJECTED] Validation failed: ${data.error}`, 'text-error');
+        } catch (err) { addLog(`[ERROR] Execution exception: ${err.message}`, 'text-error'); }
     }
 
-    // Built-in simulator to demonstrate multi-threaded race conditions without Burp Suite
     async function exploitRaceCondition(btn) {
         const codeValue = document.getElementById('coupon-input').value;
-        btn.disabled = true;
-        btn.classList.add('opacity-50');
-        
-        addLog(`[ATTACK] Thread Pool Spawning: Dispatching 10 concurrent requests simultaneously...`, 'text-warning font-bold');
-
-        const requestArray = [];
+        addLog(`[ATTACK] Flooding pipeline requests...`, 'text-warning font-bold');
+        const tasks = [];
         for (let i = 0; i < 10; i++) {
-            requestArray.push(
-                fetch('/api/deals/claim', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code: codeValue })
-                })
-                .then(async (res) => {
-                    const data = await res.json();
-                    if (res.ok) {
-                        addLog(`[THREAD ${i} SUCCESS] State gap bypassed! ${data.message}`, 'text-success font-bold');
-                    } else {
-                        addLog(`[THREAD ${i} FAILED] Locked out: ${data.error}`, 'text-neutral-400');
-                    }
-                })
-            );
+            tasks.push(fetch('/api/deals/claim', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: codeValue })
+            }).then(async res => {
+                const data = await res.json();
+                if (res.ok) addLog(`[THREAD ${i} OK] ${data.message}`, 'text-success font-bold');
+                else addLog(`[THREAD ${i} LOCK] Bypassed validation checks`, 'text-neutral-400');
+            }));
         }
-
-        await Promise.all(requestArray);
-        btn.disabled = false;
-        btn.classList.remove('opacity-50');
+        await Promise.all(tasks);
     }
-
-    // Simple Countdown Logic
-    setInterval(() => {
-        const timerEls = document.querySelectorAll('.countdown-pulse span:last-child');
-        timerEls.forEach(el => {
-            let [h, m, s] = el.innerText.split(':').map(Number);
-            s--;
-            if(s < 0) { s = 59; m--; }
-            if(m < 0) { m = 59; h--; }
-            el.innerText = [h, m, s].map(v => v.toString().padStart(2, '0')).join(':');
-        });
-    }, 1000);
 </script>
 </body>
 </html>

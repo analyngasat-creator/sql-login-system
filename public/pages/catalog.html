@@ -144,32 +144,31 @@
         <div class="hidden md:flex items-center gap-lg">
             <div class="relative nav-dropdown group h-full py-2">
                 <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
-                    Shop
+                    Shop Lab Modules
                     <span class="material-symbols-outlined text-[18px]">expand_more</span>
                 </button>
-                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
-                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
-                        <span class="inline-block align-middle mr-1">🏠</span> Home
-                    </a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                <div class="dropdown-menu hidden absolute top-full left-0 pt-4 w-56 bg-transparent z-50">
+                    <div class="bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                        <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
+                            <span class="inline-block align-middle mr-1">🏠</span> Home
+                        </a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                    </div>
                 </div>
             </div>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
         </div>
     </div>
     <div class="flex items-center gap-md">
-        <button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-colors" data-icon="shopping_cart">shopping_cart</button>
-        <button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-colors" data-icon="person">person</button>
+        <button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-colors" onclick="window.location.href='/pages/wishlist.html'" data-icon="shopping_cart">shopping_cart</button>
+        <button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-colors" onclick="window.location.href='/pages/reviews.html'" data-icon="person">person</button>
     </div>
 </nav>
 
 <main class="pt-[100px] pb-section-desktop px-lg max-w-7xl mx-auto">
-<!-- Educational Header -->
 <header class="mb-3xl border-b border-border-light pb-lg">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
 <div>
@@ -188,7 +187,6 @@
 </div>
 </header>
 <div class="flex flex-col lg:flex-row gap-gutter">
-<!-- Sidebar Filters -->
 <aside class="w-full lg:w-64 flex-shrink-0 space-y-lg">
 <div>
 <h3 class="font-headline text-body font-bold mb-md">Categories</h3>
@@ -238,9 +236,7 @@
 </div>
 </div>
 </aside>
-<!-- Product Canvas -->
 <section class="flex-grow">
-<!-- Sandbox Search Bar -->
 <div class="mb-xl bg-white shadow-md rounded-2xl p-md border border-primary-container/20">
 <div class="flex flex-col gap-sm">
 <div class="flex items-center justify-between px-sm">
@@ -256,27 +252,12 @@
 </div>
 </div>
 </div>
-<!-- Product Grid -->
 <div id="product-grid" class="bento-grid">
 <!-- Data will inject here dynamically -->
-</div>
-<!-- Pagination -->
-<div class="mt-3xl flex justify-center items-center gap-sm">
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">2</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">3</button>
-<span class="px-2">...</span>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-surface-container transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
 </div>
 </section>
 </div>
 </main>
-<!-- Footer -->
 <footer class="w-full px-lg py-3xl flex flex-col items-center text-center gap-md bg-surface-container-highest border-t border-border-light dark:bg-inverse-surface dark:border-outline">
 <span class="font-headline text-headline-mobile text-on-surface dark:text-inverse-on-surface font-extrabold tracking-tight">ShopVibe</span>
 <div class="flex flex-wrap justify-center gap-lg max-w-2xl mx-auto">
@@ -285,7 +266,6 @@
 <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/compare.html">Compare (SSRF)</a>
 <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/wishlist.html">Wishlist (IDOR)</a>
 <a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="/pages/reviews.html">Reviews (Stored XSS)</a>
-<a class="font-body text-body-sm text-text-muted hover:underline hover:text-primary transition-all duration-200" href="#">Privacy Policy</a>
 </div>
 <p class="font-body text-body-sm text-text-muted mt-lg">© 2026 ShopVibe Atomic Vulnerability Architecture Lab. All Rights Reserved.</p>
 </footer>
@@ -316,30 +296,22 @@
         async function fetchCatalog() {
             const query = searchInput.value;
             const grid = document.getElementById('product-grid');
-            
             try {
                 const res = await fetch(`/api/catalog/search?q=${encodeURIComponent(query)}`);
                 const items = await res.json();
-                
                 grid.innerHTML = '';
-
                 if (!items || items.length === 0 || items.error) {
                     grid.innerHTML = `<div class="col-span-full p-xl bg-surface shadow rounded-xl text-center text-text-muted">No items found matching the criteria. ${items.error ? '<br><span class="text-error font-code">'+items.error+'</span>' : ''}</div>`;
                     return;
                 }
-
                 items.forEach(item => {
                     const fallbackImg = productImages[item.name] || "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80";
                     const isSecret = item.price > 500;
-
                     grid.innerHTML += `
                         <div class="group bg-surface rounded-xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
                             <div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
                                 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${fallbackImg}" alt="${item.name}"/>
-                                ${isSecret ? `
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">Secret Vault</span>
-                                </div>` : ''}
+                                ${isSecret ? `<div class="absolute top-4 left-4"><span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">Secret Vault</span></div>` : ''}
                                 <div class="absolute top-4 right-4">
                                     <button class="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-sm text-on-surface hover:text-primary transition-colors" onclick="toggleHeart(this)">
                                         <span class="material-symbols-outlined text-[20px]">favorite</span>
@@ -351,7 +323,7 @@
                                     <h3 class="font-headline text-body font-bold text-on-surface">${item.name}</h3>
                                     <span class="text-primary font-bold">$${item.price}</span>
                                 </div>
-                                <p class="text-caption text-text-muted mb-md">${item.description || 'Premium custom asset allocation context parameters.'}</p>
+                                <p class="text-caption text-text-muted mb-md">${item.description || 'Premium custom asset parameters.'}</p>
                                 <button class="w-full py-2 bg-surface-container-highest text-on-surface rounded-full text-caption font-bold group-hover:bg-primary group-hover:text-on-primary transition-all">Add to Cart</button>
                             </div>
                         </div>
@@ -376,14 +348,10 @@
         }
 
         fetchCatalog();
-
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('bg-surface/95', 'backdrop-blur-md');
-            } else {
-                nav.classList.remove('bg-surface/95', 'backdrop-blur-md');
-            }
+            if (window.scrollY > 50) { nav.classList.add('bg-surface/95', 'backdrop-blur-md'); } 
+            else { nav.classList.remove('bg-surface/95', 'backdrop-blur-md'); }
         });
     </script>
 </body>

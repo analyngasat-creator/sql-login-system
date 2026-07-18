@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Reviews - ShopVibe Atomic Vulnerability Lab</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Nunito+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Nunito+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
           tailwind.config = {
@@ -114,8 +114,8 @@
                         "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
                         "headline": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "700"}]
                 }
-              },
-            },
+              }
+            }
           }
     </script>
     <style>
@@ -149,31 +149,33 @@
 <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg py-md max-w-full mx-auto bg-surface shadow-md transition-shadow duration-300">
     <div class="flex items-center gap-xl">
         <a class="font-headline text-subhead font-extrabold text-primary tracking-tight" href="/index.html">ShopVibe</a>
-        <div class="hidden md:flex gap-lg items-center">
+        <div class="hidden md:flex items-center gap-lg">
             <div class="relative nav-dropdown group h-full py-2">
                 <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
-                    Shop
+                    Shop Lab Modules
                     <span class="material-symbols-outlined text-[18px]">expand_more</span>
                 </button>
-                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
-                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
-                        <span class="inline-block align-middle mr-1">🏠</span> Home
-                    </a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                <!-- Dropdown Content Pointed directly to pages/ modules folder with transparent spacing bridge -->
+                <div class="dropdown-menu hidden absolute top-full left-0 pt-4 w-56 bg-transparent z-50">
+                    <div class="bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                        <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
+                            <span class="inline-block align-middle mr-1">🏠</span> Home
+                        </a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                    </div>
                 </div>
             </div>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
+            <!-- Removed Arrivals and Trending -->
         </div>
     </div>
     <div class="flex items-center gap-md">
-        <button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95"><span class="material-symbols-outlined">search</span></button>
-        <button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95"><span class="material-symbols-outlined">shopping_cart</span></button>
-        <button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95"><span class="material-symbols-outlined">person</span></button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95" onclick="window.location.href='/pages/catalog.html'"><span class="material-symbols-outlined">search</span></button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95" onclick="window.location.href='/pages/wishlist.html'"><span class="material-symbols-outlined">shopping_cart</span></button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95" onclick="window.location.href='/pages/reviews.html'"><span class="material-symbols-outlined">person</span></button>
     </div>
 </nav>
 

@@ -139,32 +139,28 @@
         <div class="hidden md:flex items-center gap-lg">
             <div class="relative nav-dropdown group h-full py-2">
                 <button class="font-headline text-body font-bold text-primary border-b-2 border-primary flex items-center gap-xs focus:outline-none">
-                    Shop
+                    Shop Lab Modules
                     <span class="material-symbols-outlined text-[18px]">expand_more</span>
                 </button>
-                <!-- Dropdown Content Pointed directly to pages/ modules folder -->
-                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
-                    <!-- Dropdown Home Option -->
-                    <a class="block px-md py-sm bg-primary/5 text-primary border-b border-border-light hover:bg-primary-container hover:text-on-primary-container transition-colors font-headline text-body-sm font-bold" href="/index.html">
-                        <span class="inline-block align-middle mr-1">🏠</span> Home
-                    </a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
-                    <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                <!-- Dropdown Content: Added pt-4 invisible cushion bridge -->
+                <div class="dropdown-menu hidden absolute top-full left-0 pt-4 w-56 bg-transparent z-50">
+                    <div class="bg-surface rounded-xl shadow-xl border border-border-light overflow-hidden">
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/catalog.html">Catalog (SQLi)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/deals.html">Deals (Race Condition)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/compare.html">Compare (SSRF)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/wishlist.html">Wishlist (IDOR)</a>
+                        <a class="block px-md py-sm hover:bg-primary-container hover:text-on-primary-container transition-colors font-body text-body-sm" href="/pages/reviews.html">Reviews (Stored XSS)</a>
+                    </div>
                 </div>
             </div>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Arrivals</a>
-            <a class="font-headline text-body text-on-surface-variant hover:text-primary transition-colors" href="#">Trending</a>
         </div>
     </div>
     <div class="flex items-center gap-md">
-        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">search</button>
-        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">person</button>
-        <div class="relative">
-            <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95">shopping_cart</button>
-            <span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">3</span>
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95" onclick="window.location.href='/pages/catalog.html'" title="Search (SQLi Lab)">search</button>
+        <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95" onclick="window.location.href='/pages/reviews.html'" title="Profile (Stored XSS Lab)">person</button>
+        <div class="relative cursor-pointer" onclick="window.location.href='/pages/wishlist.html'" title="Cart (IDOR Lab)">
+            <button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-all active:scale-95 pointer-events-none">shopping_cart</button>
+            <span class="absolute top-1 right-1 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full pointer-events-none">3</span>
         </div>
     </div>
 </nav>
@@ -183,10 +179,10 @@
                 <p class="font-body text-body-lg mb-2xl text-surface-container-highest max-w-lg">Discover the intersection of high-end aesthetics and energetic street style. Our latest collection is engineered for those who move fast and look better.</p>
                 <div class="flex flex-col sm:flex-row gap-md">
                     <a href="/pages/catalog.html" class="bg-primary text-on-primary text-center font-headline text-body font-bold py-md px-3xl rounded-full fuchsia-glow active:scale-95 transition-all">
-                        Shop Now
+                        Explore Catalog Lab
                     </a>
-                    <button class="border-2 border-white text-white font-headline text-body font-bold py-md px-3xl rounded-full hover:bg-white hover:text-on-surface transition-all active:scale-95">
-                        View Lookbook
+                    <button class="border-2 border-white text-white font-headline text-body font-bold py-md px-3xl rounded-full hover:bg-white hover:text-on-surface transition-all active:scale-95" onclick="window.location.href='/pages/deals.html'">
+                        View Flash Deals
                     </button>
                 </div>
             </div>
@@ -196,27 +192,29 @@
     <!-- Category Grid (Bento Style) -->
     <section class="py-section-desktop container mx-auto px-lg">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-            <div class="md:col-span-8 group relative h-[500px] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div class="md:col-span-8 group relative h-[500px] rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300" onclick="window.location.href='/pages/catalog.html'">
                 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuASVcy6apdFWFoZIsy2gVP0UzawDVpQGge5gUGD6gfbxxy0_dvAvQNZUXPP01yl_w0_5T0CFw1dwHUNOf9iwKtN7mODWvFqzuNNfv7FoRdppg3Ts9n3zIFD3QYnSvuEc8lhnieYlt8CXxlC6DcaDmdcC6RIbnc1xIBBxutBi_v-mpXevg43IQEt5k-Ph2MB-XhyQk9fUPjIhquKxYHHNBJXUmPSmk7GKXLX3bw9AAuFIg2v5cDpF81Q')"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-on-surface/70 via-transparent to-transparent"></div>
-                <div class="absolute bottom-lg left-lg">
+                <div class="absolute bottom-lg left-lg pointer-events-none">
                     <h2 class="font-headline text-headline-mobile text-on-primary mb-xs">Summer Essentials</h2>
-                    <a href="/pages/catalog.html" class="font-body text-body text-surface-container-highest underline decoration-primary underline-offset-4">Explore Collection</a>
+                    <span class="font-body text-body text-surface-container-highest underline decoration-primary underline-offset-4">Test SQL Injection</span>
                 </div>
             </div>
             <div class="md:col-span-4 grid grid-rows-2 gap-gutter">
-                <div class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300" onclick="window.location.href='/pages/deals.html'">
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvplngMWpmbxgSFop3VTU9KDsCTeLCnwMuWBKGCKbwF5SXmtwudfsJoXS0V3VipCtQ0uCrosgnLTBfRbvoHKOST8LDbp9wQUNCxGljzoPkEJzO_g9_g9DksKGKmDa4jUvEpATwOerN8w9Z3m08rDvC1laPmE36JFs4gUPUhxtvMTxKqFMMDwCbxo9G-914XSAfZfx-d8Xok9iFu7o6446evRMpOusH0bPlvkFAOL_rl45tx67qWaSc')"></div>
                     <div class="absolute inset-0 bg-on-surface/20 group-hover:bg-on-surface/40 transition-colors"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <a href="/pages/catalog.html" class="font-headline text-subhead text-white text-center px-md hover:underline">Trending Now</a>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <h3 class="font-headline text-subhead text-white text-center px-md">Trending Deals</h3>
+                        <span class="text-white underline text-sm mt-1">Test Race Condition</span>
                     </div>
                 </div>
-                <div class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:-translate-y-1 transition-all duration-300" onclick="window.location.href='/pages/compare.html'">
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrFVrniXQPIy_ZVbYlgiOJe57rcnMUuuAUev6_YtzJCWVWLfQsOr1_4UsLS3UqHzGg9lBlrHZHBwuQiBX4m6tjHtnEi6wyYSdcr4LYFgMA460DZQCiCv8APaMUUgN2Xxz8X9mCam6dhS-fXdQb1SSVCT8XC4nCKfcMiXzDA4Odivy0fafcEIW3obLof-mXqQu6n8A9ku2YSNMnGS8rfxmsVY3_km5Izb3-ZFxYuXKXDMLEscd6qiLb')"></div>
                     <div class="absolute inset-0 bg-on-surface/20 group-hover:bg-on-surface/40 transition-colors"></div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <a href="/pages/catalog.html" class="font-headline text-subhead text-white text-center px-md hover:underline">Premium Active</a>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <h3 class="font-headline text-subhead text-white text-center px-md">Premium Active</h3>
+                        <span class="text-white underline text-sm mt-1">Test SSRF Compare</span>
                     </div>
                 </div>
             </div>
@@ -233,12 +231,12 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
-                <!-- Product Card 1 -->
-                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                <!-- Product Card 1: Links to SQLi -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow cursor-pointer" onclick="window.location.href='/pages/catalog.html'">
                     <div class="relative h-[400px] overflow-hidden">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ7xyGiKcuyEQ6HP6vu1bV8f9W9fYZpPfIxlSVYGg3GTUQQrbVUzMWAfXF-1mzsaJdRrFr0BDf8fENE9PQFnXPlpFMbaItU_BdlWUpHPbSKEMIE6U4_ev5095X1f3siifnMsvZyxnriB71CrRBopZmagQmG7LRjNIJTU2SjGtVsTc3H7cD6dLnWXHPTL3EOQRPxZKPj56kuATd_9sC-XsUBNoAapNYab1ATsnr9zq8PRdZEqqCPl_o"/>
                         <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                            <span class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">Search in Catalog (SQLi)</span>
                         </div>
                     </div>
                     <div class="p-lg">
@@ -248,12 +246,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Product Card 2 -->
-                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                <!-- Product Card 2: Links to Deals -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow cursor-pointer" onclick="window.location.href='/pages/deals.html'">
                     <div class="relative h-[400px] overflow-hidden">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDrw-HW_NZg9H6bE_jQOmFXVV3M2YWxOWuVJJCEk_EYbkW6fwda_2cXvF3xl5JHpo-czEN3wsHY4BzXu0GqS3DMuB4jGlD9-c7wynXxfhlQ22ojai55ERskL5MiNYzpvYtCM2NW8-AWMY71C1yZfHI0eTAWImBGtUXGSLPexNGd0uQRhz5FCOnOUARbtiCQb_xvcOX6HOAEJKxVOPclDiLPDXmQF9D7_Rij5pk1jx-ZjScZVkZaEI-"/>
                         <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                            <span class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">Claim Deal (Race Cond)</span>
                         </div>
                     </div>
                     <div class="p-lg">
@@ -263,12 +261,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Product Card 3 -->
-                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                <!-- Product Card 3: Links to Compare -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow cursor-pointer" onclick="window.location.href='/pages/compare.html'">
                     <div class="relative h-[400px] overflow-hidden">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHLIO8a_sFd7CsFbjCFhHBurqf8NWZgqrjyMRs10bhKFDYMQhfyvAHU4erjB-8TlC_XR0mpY8GBM3JkJfACHb_oR3E2J0NLl3MVDYNvNiFrhc1QFOrjUZTz4Y5PIF9-JD3okNrtUdk3wbAo6ILDIo0lYfQ80hmgAkdc9Lup3CXZ80g9LtmHzsr8QTDTn2UMS-J2BfIRH905EXMUtCYJ9XK4ug_iyvmB8WBGDVcBEcv081wd8iqGnPP"/>
                         <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                            <span class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">Compare Specs (SSRF)</span>
                         </div>
                     </div>
                     <div class="p-lg">
@@ -278,12 +276,12 @@
                         </div>
                     </div>
                 </div>
-                <!-- Product Card 4 -->
-                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow">
+                <!-- Product Card 4: Links to Wishlist -->
+                <div class="group bg-surface rounded-2xl overflow-hidden shadow-md hover:-translate-y-2 transition-all duration-300 fuchsia-glow cursor-pointer" onclick="window.location.href='/pages/wishlist.html'">
                     <div class="relative h-[400px] overflow-hidden">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9Xjdu4byGjlK9RTMRQ6CS2XqQrO4oCt7QiV0_Z27bHwrk23pZawhYI4BwPNjXR4zXtMdG8NdO0LNuPIeFg53nmrFfb_Es5omJHVIOHvgPgBqbRxpIeoA7WpZoLmLsXYQvXdI0vZKnoTEiZvRPDOXZrZiDCUFJhSikUho47eB_nPcH-hJCICduupHmhVcjrci05pu7nQHJTjPMrqWPaGdr7fMO6elqxiPMzyHKPPdTR4USCfIlKRI2"/>
                         <div class="absolute bottom-0 left-0 w-full p-md translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <a href="/pages/catalog.html" class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">View in Catalog</a>
+                            <span class="block w-full bg-on-surface text-on-primary text-center font-headline text-body-sm font-bold py-sm rounded-lg hover:bg-primary">Save to Wishlist (IDOR)</span>
                         </div>
                     </div>
                     <div class="p-lg">
@@ -306,7 +304,7 @@
                 <p class="font-body text-body mb-lg text-on-surface-variant">Unlock exclusive early access, member-only drops, and 15% off your first order.</p>
                 <div class="flex gap-sm">
                     <input class="flex-1 bg-surface/60 backdrop-blur-md border-border-medium focus:border-primary focus:ring-1 focus:ring-primary rounded-xl px-lg py-md font-body text-body" placeholder="Enter your email" type="email"/>
-                    <button class="bg-on-surface text-on-primary font-headline text-body font-bold px-2xl py-md rounded-xl hover:bg-primary transition-all active:scale-95">Subscribe</button>
+                    <button class="bg-on-surface text-on-primary font-headline text-body font-bold px-2xl py-md rounded-xl hover:bg-primary transition-all active:scale-95" onclick="alert('Subscription forms like this are prime targets for Cross-Site Scripting (XSS). Head over to the Reviews lab to test this vulnerability!')">Subscribe</button>
                 </div>
             </div>
         </div>
