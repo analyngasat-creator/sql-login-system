@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: Accessibility Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #app-container { border: 2px solid #444; padding: 20px; border-radius: 8px; }
+        .bug-img { width: 100px; height: 100px; background: #f1c40f; display: block; margin: 10px 0; }
+        button { background: #9b59b6; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        
+        /* Red Warning Box */
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; background-color: #c0392b; color: white;}
+        
+        /* Back Button Style */
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Accessibility Simulation</h1>
+    <p>Scenario: Image missing the required <code>alt</code> attribute.</p>
+
+    <div id="app-container">
+        <img id="myImage" src="logo.png" class="bug-img">
+        <button onclick="checkAccessibility()">Check Accessibility</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <!-- The missing Back to Homepage link -->
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        function checkAccessibility() {
+            const img = document.getElementById('myImage');
+            const report = document.getElementById('bug-report');
+
+            if (!img.hasAttribute('alt') || img.getAttribute('alt') === "") {
+                report.style.display = "block";
+                report.style.backgroundColor = "#c0392b"; 
+                
+                report.innerHTML = `<strong>BugSafari Detection:</strong><br>
+                                    Type: Accessibility Defect<br>
+                                    Status: Missing 'alt' attribute on image! 
+                                    <em>Logging to database...</em>`;
+
+                fetch('/api/routes/log-bug', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        category: 'Accessibility',
+                        message: 'Image element found without alt text.',
+                        url: window.location.pathname
+                    })
+                })
+                .then(() => report.innerHTML += `<br><strong>Status: Logged successfully!</strong>`);
+            } else {
+                alert("Accessibility check passed!");
+            }
+        }
+    </script>
+</body>
+</html>

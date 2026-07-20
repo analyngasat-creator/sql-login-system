@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: Unhandled API Failure Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #app-container { border: 2px solid #444; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        button { background: #e67e22; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; }
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Unhandled API Failure Simulation</h1>
+    <p>Scenario: The app performs an API fetch request without error handling (.catch or try/catch).</p>
+
+    <div id="app-container">
+        <button onclick="triggerUnhandledFailure()">Trigger Unhandled Request</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        // --- THE SCENARIO (Intentional Bug) ---
+        function triggerUnhandledFailure() {
+            const report = document.getElementById('bug-report');
+            report.style.display = "block";
+            report.style.backgroundColor = "#f39c12";
+            report.innerText = "Firing unhandled request...";
+
+            // FIX: Use a fake domain to guarantee a network failure
+            // FIX: Added a 100ms delay to ensure the listener is ready
+            setTimeout(() => {
+                fetch('https://this-domain-does-not-exist-123456789.com');
+            }, 100);
+        }
+
+        // --- THE BUGSAFARI MONITOR ---
+        window.addEventListener('unhandledrejection', event => {
+            const report = document.getElementById('bug-report');
+            report.style.backgroundColor = "#ff4d4d";
+            report.innerHTML = `
+                <strong>BugSafari Detection:</strong><br>
+                Type: Unhandled API Failure (Promise Rejection)<br>
+                Reason: ${event.reason || 'Network or server endpoint rejected'}<br>
+                <em>Logging to database...</em>
+            `;
+
+            // Automatically send the bug payload to your database table
+            fetch('/api/routes/log-bug', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    category: 'API Failure',
+                    message: `Unhandled rejection: ${event.reason || 'Endpoint failed'}`,
+                    url: window.location.pathname
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    report.innerHTML += `<br><strong>Status: Logged successfully to database!</strong>`;
+                }
+            })
+            .catch(err => console.error("Database log transmission failed:", err));
+        });
+    </script>
+</body>
+</html>

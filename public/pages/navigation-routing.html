@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: Navigation Defect Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #app-container { border: 2px solid #444; padding: 20px; border-radius: 8px; }
+        button { background: #e74c3c; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; }
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Navigation/Routing Defect Simulation</h1>
+    <p>Scenario: The user attempts to navigate to a broken or missing URL.</p>
+
+    <div id="app-container">
+        <button onclick="triggerBrokenNavigation()">Go to Missing Page</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        function triggerBrokenNavigation() {
+            const report = document.getElementById('bug-report');
+            const targetUrl = '/pages/non-existent-page.html';
+
+            // --- BUGSAFARI MONITOR ---
+            // Instead of allowing the browser to fail, we intercept the navigation
+            report.style.display = "block";
+            report.style.backgroundColor = "#c0392b";
+            report.innerHTML = `<strong>BugSafari Detection:</strong><br>
+                                Type: Routing Defect<br>
+                                Attempted Path: ${targetUrl}<br>
+                                <em>Logging to database and aborting navigation...</em>`;
+
+            // Log the bad route to your database
+            fetch('/api/routes/log-bug', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    category: 'Routing Defect',
+                    message: `User attempted to access missing route: ${targetUrl}`,
+                    url: window.location.pathname
+                })
+            })
+            .then(() => {
+                report.innerHTML += `<br><strong>Status: Logged successfully! Staying on current page to prevent 404.</strong>`;
+                
+                // Simulate preventing the navigation after 2 seconds
+                setTimeout(() => {
+                    console.log("Navigation prevented.");
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

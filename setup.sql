@@ -1,33 +1,16 @@
-CREATE TABLE IF NOT EXISTS products (
+-- Remove old table if it exists
+DROP TABLE IF EXISTS bug_logs;
+
+-- Create the new BugSafari logging structure
+CREATE TABLE bug_logs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    price REAL,
-    description TEXT
+    category TEXT NOT NULL,         -- e.g., 'Runtime Errors'
+    error_message TEXT NOT NULL,    -- The specific error detected
+    page_url TEXT NOT NULL,         -- The page where the bug occurred
+    status TEXT DEFAULT 'DETECTED', -- 'DETECTED', 'FIXED'
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS coupons (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    code TEXT UNIQUE,
-    used_count INTEGER DEFAULT 0,
-    max_uses INTEGER DEFAULT 1
-);
-
-CREATE TABLE IF NOT EXISTS wishlists (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
-    product_name TEXT
-);
-
-CREATE TABLE IF NOT EXISTS reviews (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    comment TEXT
-);
-
--- Seed Initial Data
-INSERT OR IGNORE INTO products (name, price, description) VALUES 
-('Apple Juice', 4.99, 'Freshly squeezed red apples.'),
-('Orange Juice', 5.49, 'Pure citrus goodness.'),
-('Secret Golden Juice', 999.99, 'ADMINS ONLY: Premium restricted formula.');
-
-INSERT OR IGNORE INTO coupons (code, used_count, max_uses) VALUES ('SINGLE_USE_50', 0, 1);
-INSERT OR IGNORE INTO wishlists (user_id, product_name) VALUES (1, 'Apple Juice'), (2, 'Secret Golden Juice');
+-- Optional: You can insert a test log if you want to verify the table
+INSERT INTO bug_logs (category, error_message, page_url) VALUES 
+('Runtime Errors', 'Test detection: Null property access', '/pages/runtime-errors.html');

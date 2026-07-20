@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: State Race Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #app-container { border: 2px solid #444; padding: 20px; border-radius: 8px; }
+        button { background: #9b59b6; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; }
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>State Race Simulation</h1>
+    <p>Scenario: Clicking "Save" twice quickly causes a duplicate action.</p>
+
+    <div id="app-container">
+        <!-- Clicking this twice quickly triggers the BugSafari monitor -->
+        <button onclick="saveData()">Save Data (Click me twice quickly!)</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        let lastClickTime = 0;
+        const CLICK_THRESHOLD = 800; // Threshold in milliseconds
+
+        function saveData() {
+            const now = Date.now();
+            const report = document.getElementById('bug-report');
+
+            // --- BUGSAFARI MONITOR: Detects if the user clicks too fast ---
+            if (now - lastClickTime < CLICK_THRESHOLD) {
+                report.style.display = "block";
+                report.style.backgroundColor = "#ff4d4d";
+                report.innerHTML = `<strong>BugSafari Detection:</strong><br>
+                                    Type: State Race / Duplicate Action<br>
+                                    Status: Detected multiple clicks in under ${CLICK_THRESHOLD}ms! 
+                                    <em>Logging to database...</em>`;
+                
+                // Send the bug to your database
+                fetch('/api/routes/log-bug', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        category: 'State Race',
+                        message: 'Duplicate action detected: User clicked save twice.',
+                        url: window.location.pathname
+                    })
+                })
+                .then(() => report.innerHTML += `<br><strong>Status: Logged successfully!</strong>`);
+                
+                return; // Stop the function here so the real request isn't sent
+            }
+            
+            // Update the last click time
+            lastClickTime = now;
+
+            // --- NORMAL OPERATION ---
+            console.log("Saving data normally...");
+            // You can add your actual fetch code here
+        }
+    </script>
+</body>
+</html>

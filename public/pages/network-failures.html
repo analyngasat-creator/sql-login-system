@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: Network Failure Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #app-container { border: 2px solid #444; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; }
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Network Failure Simulation</h1>
+    <p>Scenario: The app tries to save data, but the backend server returns a 404/500 error.</p>
+
+    <div id="app-container">
+        <button onclick="simulateNetworkFailure()">Save Data to Server</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        async function simulateNetworkFailure() {
+            const report = document.getElementById('bug-report');
+            report.style.display = "block";
+            report.style.backgroundColor = "#f39c12";
+            report.innerText = "Attempting to save data...";
+
+            try {
+                // Force a request to a fake URL to trigger a 404 error
+                const response = await fetch('/api/non-existent-endpoint');
+                
+                if (!response.ok) {
+                    throw new Error(`Server responded with status: ${response.status}`);
+                }
+            } catch (error) {
+                // 1. Update the UI
+                report.style.backgroundColor = "#ff4d4d";
+                report.innerHTML = `
+                    <strong>BugSafari Detection:</strong><br>
+                    Type: Network/Backend Failure<br>
+                    Error: ${error.message}<br>
+                    <em>Logging to database...</em>
+                `;
+
+                // 2. Send the error to your database (logs to bug_logs table)
+                fetch('/api/routes/log-bug', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        category: 'Network Failure',
+                        message: error.message,
+                        url: window.location.pathname
+                    })
+                })
+                .then(() => {
+                    report.innerHTML += `<br><strong>Status: Logged successfully!</strong>`;
+                })
+                .catch(err => console.error("Database log failed:", err));
+            }
+        }
+    </script>
+</body>
+</html>

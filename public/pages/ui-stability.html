@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: UI Stability Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #content-box { border: 2px solid #444; padding: 20px; border-radius: 8px; min-height: 100px; }
+        button { background: #27ae60; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; }
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>UI Stability Simulation</h1>
+    <p>Scenario: Content injection breaks the layout container.</p>
+
+    <div id="content-box">
+        <button onclick="triggerUIBreak()">Inject Unstable Content</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        function triggerUIBreak() {
+            const box = document.getElementById('content-box');
+            const report = document.getElementById('bug-report');
+            
+            // --- THE BUG: Inject massive text to break container layout ---
+            const massiveText = "X".repeat(5000); 
+            box.innerText = massiveText; 
+            
+            // --- BUGSAFARI MONITOR ---
+            // We check if the box width is now larger than the container should allow
+            if (box.scrollWidth > box.clientWidth) {
+                report.style.display = "block";
+                report.style.backgroundColor = "#e67e22";
+                report.innerHTML = `<strong>BugSafari Detection:</strong><br>
+                                    Type: UI Stability/Layout Break<br>
+                                    Status: Element overflowed container boundaries! 
+                                    <em>Logging to database...</em>`;
+
+                // Log the UI failure to your database
+                fetch('/api/routes/log-bug', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        category: 'UI Stability',
+                        message: 'Layout container overflowed due to content injection.',
+                        url: window.location.pathname
+                    })
+                })
+                .then(() => report.innerHTML += `<br><strong>Status: Logged successfully!</strong>`);
+            }
+        }
+    </script>
+</body>
+</html>

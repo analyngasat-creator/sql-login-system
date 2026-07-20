@@ -1,16 +1,10 @@
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
-const path = require('path');
+const db = new sqlite3.Database('./database.sqlite');
 
-const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'));
+const schema = fs.readFileSync('./setup.sql', 'utf8');
 
-const sql = fs.readFileSync(path.join(__dirname, 'setup.sql'), 'utf8');
-
-db.exec(sql, (err) => {
-    if (err) {
-        console.error("Database initialization failed:", err.message);
-    } else {
-        console.log("Database initialized successfully.");
-    }
-    db.close();
+db.exec(schema, (err) => {
+    if (err) console.error("Database init error:", err);
+    else console.log("Database initialized for BugSafari!");
 });

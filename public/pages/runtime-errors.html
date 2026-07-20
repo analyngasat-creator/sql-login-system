@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BugSafari: Runtime Error Scenario</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #1a1a2e; color: white; }
+        #app-container { border: 2px solid #444; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        button { background: #e94560; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; }
+        #bug-report { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 15px; background: #444; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Runtime Error Simulation</h1>
+    <p>Scenario: The app tries to greet a user, but the user data is missing (null).</p>
+
+    <div id="app-container">
+        <div id="welcome">Welcome, Guest!</div>
+        <button onclick="simulateProfileLoad()">Load User Profile</button>
+    </div>
+
+    <div id="bug-report"></div>
+
+    <a href="/" class="back-btn">← Back to Homepage</a>
+
+    <script>
+        // --- THE SCENARIO ---
+        function simulateProfileLoad() {
+            const user = null; // API failed to return object
+            // This crashes the app
+            document.getElementById('welcome').innerText = "Welcome, " + user.name;
+        }
+
+        // --- THE BUGSAFARI MONITOR ---
+        window.onerror = function(message, source, lineno, colno, error) {
+            const report = document.getElementById('bug-report');
+            report.style.display = "block";
+            report.style.backgroundColor = "#ff4d4d";
+            report.innerHTML = `
+                <strong>BugSafari Detection:</strong><br>
+                Type: Runtime Exception<br>
+                Error: ${message}<br>
+                Location: Line ${lineno}
+            `;
+            console.error("BugSafari captured:", message);
+            return true; 
+        };
+    </script>
+</body>
+</html>

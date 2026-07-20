@@ -1,28 +1,25 @@
+// index.js - The complete server entry point
 const express = require('express');
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
 const app = express();
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+// --- THIS IS THE PART THAT WAS MISSING ---
+// Import the central dispatcher you just created
+const bugRoutes = require('./api/routes/index');
 
-// Global Database connection
-const db = new sqlite3.Database(path.join(__dirname, '../database.sqlite'));
-app.set('db', db);
+// Mount the dispatcher to your API path
+app.use('/api/routes', bugRoutes);
+// ------------------------------------------
 
-// Register atomic vulnerability routes
-app.use('/api/catalog', require('./routes/catalog'));
-app.use('/api/deals', require('./routes/deals'));
-app.use('/api/compare', require('./routes/compare'));
-app.use('/api/wishlist', require('./routes/wishlist'));
-app.use('/api/reviews', require('./routes/review')); // matches file: review.js
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Local server initialization (Only runs when executing file directly)
-if (require.main === module) {
-    const PORT = 3000;
-    app.listen(PORT, () => {
-        console.log(`[+] Stitch Lab Backend actively listening on http://localhost:${PORT}`);
-    });
-}
+// Root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-module.exports = app;
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`BugSafari server is running at http://localhost:${PORT}`);
+});
